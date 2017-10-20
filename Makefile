@@ -1,8 +1,38 @@
-.PHONY: build clean
+.PHONY: build sign clean
 
 TARGET = $(shell pwd)/target
-KEYFILE = fruit-apk-key.rsa
+KEYFILE = $(shell pwd)/fruit-apk-key.rsa
 USER = fruitdev
+ARCH = armhf
+
+PACKAGES = \
+	rpi-boot.apk \
+	rpi2-boot.apk \
+	rpi-modules.apk \
+	rpi2-modules.apk \
+	alpine-base.apk \
+	tzdata.apk \
+	kbd-bkeymaps.apk \
+	wireless-tools.apk \
+	wpa_supplicant.apk \
+	openssh.apk \
+	openssh-server.apk \
+	curl.apk \
+	dnsmasq.apk \
+	nfs-utils.apk \
+	qemu.apk \
+	docker.apk \
+	openvpn.apk \
+	btrfs-progs.apk \
+	parted.apk \
+	singularity.apk \
+	bash.apk \
+	python.apk \
+	e2fsprogs.apk \
+	abuild.apk \
+	sfdisk.apk \
+
+
 
 ifeq ($(TARGET),)
 	TARGET = $(shell pwd)/target
@@ -12,6 +42,8 @@ ifeq ($(USER),root)
 	USER = fruitdev
 endif
 
+
+build: sign
 
 .prepare:
 	apk update
@@ -27,11 +59,22 @@ endif
 	chmod 0400 /home/$(USER)/.abuild/$$(basename $(KEYFILE))
 	chown $(USER):$(USER) /home/$(USER)/.abuild/$$(basename $(KEYFILE))
 	echo "PACKAGER_PRIVKEY=/home/fruitdev/.abuild/$$(basename $(KEYFILE))" > /home/$(USER)/.abuild/abuild.conf
+	su $(USER) -c 'mkdir -p $(TARGET)'
 	touch .prepare
 
-build: .prepare
-	su $(USER) -c 'mkdir -p $(TARGET)'
-	for package in packages/*; do if [ -e $$package/APKBUILD ]; then su $(USER) -c "cd $$package && abuild -r -P $(TARGET)"; fi; done
+$(TARGET): .prepare $(PACKAGES)
+
+%.apk: .prepare
+	if [ -e packages/$*/APKBUILD ]; then \
+		su $(USER) -c "cd packages/$* && abuild -r -P $(TARGET)"; \
+	else \
+		apk fetch -o $(TARGET)/packages/$(ARCH) -R $*; \
+	fi
+
+sign: $(TARGET)
+	rm -f $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
+	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
+	abuild-sign -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 
 clean:
 	[ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ] && for package in packages/*; do if [ -e $$package/APKBUILD ]; then su $(USER) -c "cd $$package && abuild clean"; fi; done || true
