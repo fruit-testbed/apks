@@ -1,0 +1,40 @@
+# Maintainer: Herry <herry.herry@glasgow.ac.uk>
+pkgname=fruit-base
+pkgver=0.0.4
+pkgrel=0
+pkgdesc="Meta package for Fruit Operating System"
+url="https://fruit-testbed.org"
+arch="noarch"
+license="BSD"
+makedepends=""
+depends=""
+depends_dev=""
+install=""
+subpackages=""
+source=""
+options="!check"
+
+package() {
+	mkdir -p "$pkgdir"/etc
+
+	# create /etc/motd
+	cat >"$pkgdir"/etc/issue<<EOF
+FruitOS ${pkgver}
+
+EOF
+
+	# create /etc/issue
+	cat >"$pkgdir"/etc/issue<<EOF
+FruitOS ${pkgver} - Kernel \\r on an \\m (\\l)
+
+EOF
+
+	# create /etc/os-release
+	cat >"$pkgdir"/etc/os-release<<EOF
+NAME="FruitOS"
+ID=fruit
+VERSION_ID=$pkgver
+PRETTY_NAME="FruitOS v${pkgver}"
+HOME_URL="https://fruit-testbed.org"
+EOF
+}
