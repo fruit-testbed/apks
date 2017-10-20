@@ -1,0 +1,4 @@
+/.prepare
+/target
+/packages/*/src
+/packages/*/pkg

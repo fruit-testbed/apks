@@ -1,0 +1,31 @@
+# Contributor: "Herry <herry.herry@glasgow.ac.uk>"
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=rpi-boot
+pkgver=1.20170811
+pkgrel=0
+pkgdesc="RaspberryPi Boot Files"
+url="https://github.com/raspberrypi/firmware"
+arch="armhf"
+license="GPL"
+depends=""
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="${pkgname}-${pkgver}.zip::https://github.com/raspberrypi/firmware/archive/1.20170811.zip"
+builddir="$srcdir/firmware-${pkgver}"
+options="!strip suid"
+
+prepare() {
+	default_prepare
+}
+
+build() {
+	return 0
+}
+
+package() {
+	mkdir -p ${pkgdir}/boot/
+	cp -rf ${builddir}/boot/* ${pkgdir}/boot/
+}	
+sha512sums="9091b5d2fa625b49486c143eddefbd6dc3753e4bcea69827f4eefa76ab91a86d56b2a8ea05a2322b077d69e0b211b16bfd5e464fe56bbee9e3cacf6c7cca3c22  rpi-boot-1.20170811.zip"
