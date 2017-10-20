@@ -12,9 +12,9 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.zip::https://github.com/raspberrypi/firmware/archive/1.20170811.zip"
+source="firmware-${pkgver}.zip::https://github.com/raspberrypi/firmware/archive/1.20170811.zip"
 builddir="$srcdir/firmware-${pkgver}"
-options="!strip suid"
+options="!strip suid !check"
 
 prepare() {
 	default_prepare
@@ -26,6 +26,9 @@ build() {
 
 package() {
 	mkdir -p ${pkgdir}/lib/modules/
-	cp -rf ${builddir}/modules/* ${pkgdir}/lib/modules/
+	dirs=$(ls ${builddir}/modules/ | grep -v '\-v7+')
+	for dir in $dirs; do
+		cp -rf ${builddir}/modules/${dir} ${pkgdir}/lib/modules/
+	done
 }	
-sha512sums="cdd7d0e8e3cf39ba38ee20757f612fe99cd9b9a84ee76ec1e25fbeaee8707c35b1fe9b2b92ee85aaa34821620798615bddcf5218ac94983844ecd4ea19a07d6e  rpi-modules-1.20170811.zip"
+sha512sums="9091b5d2fa625b49486c143eddefbd6dc3753e4bcea69827f4eefa76ab91a86d56b2a8ea05a2322b077d69e0b211b16bfd5e464fe56bbee9e3cacf6c7cca3c22  firmware-1.20170811.zip"

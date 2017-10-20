@@ -1,9 +1,9 @@
 # Contributor: "Herry <herry.herry@glasgow.ac.uk>"
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
-pkgname=rpi-boot
+pkgname=rpi2-modules
 pkgver=1.20170811
 pkgrel=0
-pkgdesc="RaspberryPi Boot Files"
+pkgdesc="RaspberryPi Linux Kernel Modules"
 url="https://github.com/raspberrypi/firmware"
 arch="armhf"
 license="GPL"
@@ -25,12 +25,7 @@ build() {
 }
 
 package() {
-	mkdir -p ${pkgdir}/boot/
-	cp -rf ${builddir}/boot/overlays ${pkgdir}/boot/
-	cp -rf ${builddir}/boot/bcm2708-* ${pkgdir}/boot/
-	cp -rf ${builddir}/boot/bootcode.bin ${pkgdir}/boot/
-	cp -rf ${builddir}/boot/fixup.dat ${pkgdir}/boot/
-	cp -rf ${builddir}/boot/kernel.img ${pkgdir}/boot/
-	cp -rf ${builddir}/boot/start.elf ${pkgdir}/boot/
+	mkdir -p ${pkgdir}/lib/modules/
+	cp -rf ${builddir}/modules/*-v7+ ${pkgdir}/lib/modules/
 }	
 sha512sums="9091b5d2fa625b49486c143eddefbd6dc3753e4bcea69827f4eefa76ab91a86d56b2a8ea05a2322b077d69e0b211b16bfd5e464fe56bbee9e3cacf6c7cca3c22  firmware-1.20170811.zip"

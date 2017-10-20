@@ -2,3 +2,4 @@
 /target
 /packages/*/src
 /packages/*/pkg
+/fruit-apk-key.rsa
