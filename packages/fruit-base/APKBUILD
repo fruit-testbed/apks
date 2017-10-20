@@ -7,7 +7,7 @@ url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
 makedepends=""
-depends=""
+depends="alpine-base"
 depends_dev=""
 install=""
 subpackages=""
@@ -37,4 +37,7 @@ VERSION_ID=$pkgver
 PRETTY_NAME="FruitOS v${pkgver}"
 HOME_URL="https://fruit-testbed.org"
 EOF
+
+	# create /etc/hostname
+	echo "fruit" >"$pkgdir"/etc/hostname
 }
