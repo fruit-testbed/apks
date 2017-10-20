@@ -33,7 +33,8 @@ PACKAGES = \
 	e2fsprogs.apk \
 	abuild.apk \
 	sfdisk.apk \
-	raspberrypi \
+	raspberrypi.apk \
+	fruit-base.apk \
 
 
 ifeq ($(TARGET),)
