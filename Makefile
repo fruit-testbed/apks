@@ -6,10 +6,10 @@ USER = fruitdev
 ARCH = armhf
 
 PACKAGES = \
-	rpi-boot.apk \
-	rpi2-boot.apk \
-	rpi-modules.apk \
-	rpi2-modules.apk \
+	rpi-boot-linux.apk \
+	rpi2-boot-linux.apk \
+	rpi-kernel-modules.apk \
+	rpi2-kernel-modules.apk \
 	alpine-base.apk \
 	tzdata.apk \
 	kbd-bkeymaps.apk \
@@ -31,7 +31,7 @@ PACKAGES = \
 	e2fsprogs.apk \
 	abuild.apk \
 	sfdisk.apk \
-
+	raspberrypi \
 
 
 ifeq ($(TARGET),)
