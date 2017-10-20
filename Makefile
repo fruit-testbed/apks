@@ -6,6 +6,8 @@ USER = fruitdev
 ARCH = armhf
 
 PACKAGES = \
+	fruit-boot-conf.apk \
+	fruit-keys.apk \
 	rpi-boot-linux.apk \
 	rpi2-boot-linux.apk \
 	rpi-kernel-modules.apk \
