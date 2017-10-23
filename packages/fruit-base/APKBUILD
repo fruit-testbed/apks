@@ -7,7 +7,7 @@ url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
 makedepends=""
-depends="alpine-base"
+depends="alpine-baselayout alpine-conf alpine-keys apk-tools busybox busybox-initscripts busybox-suid libc-utils openrc"
 depends_dev=""
 install=""
 subpackages=""
@@ -32,12 +32,9 @@ EOF
 	# create /etc/os-release
 	cat >"$pkgdir"/etc/os-release<<EOF
 NAME="FruitOS"
-ID=fruit
-VERSION_ID=$pkgver
+ID=fruitos
+VERSION=$pkgver
 PRETTY_NAME="FruitOS v${pkgver}"
 HOME_URL="https://fruit-testbed.org"
 EOF
-
-	# create /etc/hostname
-	echo "fruit" >"$pkgdir"/etc/hostname
 }
