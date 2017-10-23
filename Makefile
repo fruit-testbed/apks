@@ -51,6 +51,7 @@ build: sign
 
 .prepare:
 	apk update
+	apk upgrade
 	apk add alpine-sdk
 	adduser -D $(USER)
 	echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers; \
