@@ -125,4 +125,4 @@ cleancache:
 cleanapks:
 	rm -f $(TARGET)/fruit-apks.tar.gz
 
-cleanall: clean cleantarget cleancache cleantgz
+cleanall: clean cleantarget cleancache cleanapks
