@@ -86,6 +86,10 @@ sign: $(TARGET)
 	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
 	abuild-sign -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 
+apks:
+	cd $(TARGET)/ && tar cvzf fruit-apks.tar.gz packages
+
+
 clean:
 	if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ]; then \
 		for package in packages/*; do \
@@ -116,4 +120,7 @@ cleancache:
 		fi; \
 	done
 
-cleanall: clean cleantarget cleancache
+cleanapks:
+	rm -f $(TARGET)/fruit-apks.tar.gz
+
+cleanall: clean cleantarget cleancache cleantgz
