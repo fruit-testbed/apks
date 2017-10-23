@@ -102,8 +102,17 @@ clean:
 	if [ $$(mount | grep ' on /var/cache/distfiles ' | wc -l) -ne 0 ]; then \
 		umount -f /var/cache/distfiles; \
 	fi
-	rm -rf .prepare $(TARGET)
 	chown -R $$(id -u -n):$$(id -g -n) .
+	rm -f .prepare
+
+cleantarget:
+	rm -rf $(TARGET)
 
 cleancache:
-	for package in packages/*; do if [ -e $$package/APKBUILD ]; then cd $$package && abuild -F cleancache; fi; done
+	for package in packages/*; do \
+		if [ -e $$package/APKBUILD ]; then \
+			cd $$package && abuild -F cleancache; \
+		fi; \
+	done
+
+cleanall: clean cleantarget cleancache
