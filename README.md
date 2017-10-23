@@ -14,8 +14,10 @@ To Build:
    will be used to sign the packages and repository's index
    file.
 
+2. Install required software: `$ apk add make`
+
 2. Invoke command `$ make`. This will install necessary files,
-   build packages or download them from other repositories.
+   build packages and/or download them from other repositories.
 
 If everything works well then all packages are available at
 `target/packages/armhf/`. You can publish the packages by
