@@ -4,6 +4,7 @@ TARGET = $(shell pwd)/target
 KEYFILE = $(shell pwd)/fruit-apk-key.rsa
 USER = fruitdev
 ARCH = armhf
+CACHE = $(shell pwd)/cache
 
 PACKAGES = \
 	fruit-boot-conf.apk \
@@ -52,7 +53,7 @@ build: sign
 	apk update
 	apk add alpine-sdk
 	adduser -D $(USER)
-	echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers
+	echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers; \
 	addgroup $(USER) abuild
 	mkdir -p /var/cache/distfiles
 	chmod a+w /var/cache/distfiles
@@ -63,6 +64,11 @@ build: sign
 	chown $(USER):$(USER) /home/$(USER)/.abuild/$$(basename $(KEYFILE))
 	echo "PACKAGER_PRIVKEY=/home/fruitdev/.abuild/$$(basename $(KEYFILE))" > /home/$(USER)/.abuild/abuild.conf
 	su $(USER) -c 'mkdir -p $(TARGET)'
+	if [ "$(CACHE)" != "" ]; then \
+		mkdir -p $(CACHE); \
+		mkdir -p $(CACHE).workdir; \
+		mount -t overlay -o lowerdir=/var/cache/distfiles,upperdir=$(CACHE),workdir=$(CACHE).workdir overlay /var/cache/distfiles; \
+	fi
 	touch .prepare
 
 $(TARGET): .prepare $(PACKAGES)
@@ -80,8 +86,22 @@ sign: $(TARGET)
 	abuild-sign -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 
 clean:
-	[ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ] && for package in packages/*; do if [ -e $$package/APKBUILD ]; then su $(USER) -c "cd $$package && abuild clean"; fi; done || true
-	if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ]; then deluser $(USER); fi
+	if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ]; then \
+		for package in packages/*; do \
+			if [ -e $$package/APKBUILD ]; then \
+				su $(USER) -c "cd $$package && abuild clean"; \
+			fi; \
+		done; \
+	fi
+	if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ]; then \
+		deluser $(USER); \
+	fi
+	if [ -e /etc/sudoers ]; then \
+		sed -i 's/^$(USER).*$$//' /etc/sudoers; \
+	fi
+	if [ $$(mount | grep ' on /var/cache/distfiles ' | wc -l) -ne 0 ]; then \
+		umount -f /var/cache/distfiles; \
+	fi
 	rm -rf .prepare $(TARGET)
 	chown -R $$(id -u -n):$$(id -g -n) .
 
