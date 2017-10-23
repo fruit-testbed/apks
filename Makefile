@@ -91,7 +91,7 @@ apks:
 
 
 clean:
-	if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ]; then \
+	if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ] && [ -e /usr/bin/abuild ]; then \
 		for package in packages/*; do \
 			if [ -e $$package/APKBUILD ]; then \
 				su $(USER) -c "cd $$package && abuild clean"; \
@@ -114,11 +114,13 @@ cleantarget:
 	rm -rf $(TARGET)
 
 cleancache:
-	for package in packages/*; do \
-		if [ -e $$package/APKBUILD ]; then \
-			cd $$package && abuild -F cleancache; \
-		fi; \
-	done
+	if [ -e /usr/bin/abuild ]; then \
+		for package in packages/*; do \
+			if [ -e $$package/APKBUILD ]; then \
+				cd $$package && abuild -F cleancache; \
+			fi; \
+		done; \
+	fi
 
 cleanapks:
 	rm -f $(TARGET)/fruit-apks.tar.gz
