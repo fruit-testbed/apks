@@ -4,3 +4,4 @@
 /packages/*/pkg
 /fruit-apk-key.rsa
 /cache
+/cache.workdir
