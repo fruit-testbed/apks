@@ -34,6 +34,7 @@ PACKAGES = \
 	e2fsprogs.apk \
 	abuild.apk \
 	sfdisk.apk \
+	util-linux.apk \
 	raspberrypi.apk \
 	fruit-base.apk \
 
