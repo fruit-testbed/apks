@@ -73,6 +73,7 @@ overlay:
 		echo "PACKAGER_PRIVKEY=/home/fruitdev/.abuild/$$(basename $(KEYFILE))" > /home/$(USER)/.abuild/abuild.conf && \
 		mkdir -p $(TARGET)/packages/$(ARCH) && \
 		chown -R $(USER):$(USER) $(TARGET)
+	addgroup root abuild
 	mkdir -p /var/cache/distfiles && chmod a+w /var/cache/distfiles
 	touch .prepare
 
