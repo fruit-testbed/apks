@@ -4,15 +4,8 @@ TARGET = $(shell pwd)/target
 KEYFILE = $(shell pwd)/fruit-apk-key.rsa
 USER = fruitdev
 ARCH = armhf
-CACHE = $(shell pwd)/cache
 
 PACKAGES = \
-	fruit-boot-conf.apk \
-	fruit-keys.apk \
-	rpi-boot-linux.apk \
-	rpi2-boot-linux.apk \
-	rpi-kernel-modules.apk \
-	rpi2-kernel-modules.apk \
 	alpine-base.apk \
 	tzdata.apk \
 	kbd-bkeymaps.apk \
@@ -36,6 +29,11 @@ PACKAGES = \
 	sfdisk.apk \
 	util-linux.apk \
 	raspberrypi.apk \
+	mkinitfs.apk \
+	\
+	rpi2-boot-linux.apk \
+	\
+	fruit-keys.apk \
 	fruit-base.apk \
 
 
@@ -49,6 +47,14 @@ endif
 
 
 build: sign
+
+overlay:
+	mkdir -p .cache .cache.workdir /var/cache/distfiles
+	mount -t overlay -o lowerdir=/var/cache/distfiles,upperdir=.cache,workdir=.cache.workdir overlay /var/cache/distfiles
+	mkdir -p .usr .usr.workdir
+	mount -t overlay -o lowerdir=/usr,upperdir=.usr,workdir=.usr.workdir overlay /usr
+	mkdir -p .etc .etc.workdir
+	mount -t overlay -o lowerdir=/etc,upperdir=.etc,workdir=.etc.workdir overlay /etc
 
 .prepare:
 	apk update
@@ -65,12 +71,7 @@ build: sign
 	chmod 0400 /home/$(USER)/.abuild/$$(basename $(KEYFILE))
 	chown $(USER):$(USER) /home/$(USER)/.abuild/$$(basename $(KEYFILE))
 	echo "PACKAGER_PRIVKEY=/home/fruitdev/.abuild/$$(basename $(KEYFILE))" > /home/$(USER)/.abuild/abuild.conf
-	su $(USER) -c 'mkdir -p $(TARGET)'
-	if [ "$(CACHE)" != "" ]; then \
-		mkdir -p $(CACHE); \
-		mkdir -p $(CACHE).workdir; \
-		mount -t overlay -o lowerdir=/var/cache/distfiles,upperdir=$(CACHE),workdir=$(CACHE).workdir overlay /var/cache/distfiles; \
-	fi
+	su $(USER) -c 'mkdir -p $(TARGET)/packages/$(ARCH)'
 	touch .prepare
 
 $(TARGET): .prepare $(PACKAGES)
