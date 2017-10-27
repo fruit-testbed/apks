@@ -31,7 +31,9 @@ PACKAGES = \
 	raspberrypi.apk \
 	mkinitfs.apk \
 	\
+	rpi-boot-linux.apk \
 	rpi2-boot-linux.apk \
+	rpi-firmware.apk \
 	\
 	fruit-keys.apk \
 	fruit-base.apk \
@@ -86,7 +88,7 @@ $(TARGET): .prepare $(PACKAGES)
 sign: $(TARGET)
 	rm -f $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
-	abuild-sign -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
+	abuild-sign -q -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 
 apks:
 	cd $(TARGET)/ && tar cvzf fruit-apks.tar.gz packages

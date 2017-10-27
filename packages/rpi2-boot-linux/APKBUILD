@@ -5,7 +5,7 @@ pkgrel=0
 pkgdesc="Boot and Linux Kernel for RaspberryPi 2/3"
 url="https://fruit-testbed.org"
 arch="armhf"
-license="GPL"
+license="custom"
 depends=""
 depends_dev=""
 makedepends="$depends_dev"
@@ -15,6 +15,8 @@ source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/v3.6/mai
 bootcode.bin::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/bootcode.bin
 start.elf::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/start.elf
 fixup.dat::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/fixup.dat
+COPYING.linux::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/COPYING.linux
+LICENCE.broadcom::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/LICENCE.broadcom
 "
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="!strip suid !check"
@@ -29,18 +31,36 @@ build() {
 
 package() {
 	mkdir -p ${pkgdir}
+
+	# Get Linux kernel version
 	version=$(cat ${srcdir}/usr/share/kernel/rpi2/kernel.release)
+
 	cp -rf ${srcdir}/boot ${pkgdir}/
 	cp -rf ${srcdir}/usr ${pkgdir}/
 	cp -rf ${srcdir}/lib ${pkgdir}/
+
+	# Copy device tree overlays into /boot
 	cp -rf ${srcdir}/usr/lib/linux-${version}/overlays ${pkgdir}/boot/
-	cp -rf ${srcdir}/usr/lib/linux-${version}/*-rpi-2-*.dtb ${pkgdir}/boot/
-	cp -rf ${srcdir}/usr/lib/linux-${version}/*-rpi-3-*.dtb ${pkgdir}/boot/
+	# Remove redundant overlay files and then create a soft link
+	cd ${pkgdir}/usr/lib/linux-${version} && rm -rf overlays && ln -sf /boot/overlays overlays
+
+	# Copy RaspberryPi 2/3 .dtb files into /boot
+	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2836-rpi-*.dtb ${pkgdir}/boot/
+	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2709-rpi-*.dtb ${pkgdir}/boot/
+	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2710-rpi-*.dtb ${pkgdir}/boot/
+
+	# Copy bootloaders into /boot
 	cp -f ${srcdir}/bootcode.bin ${pkgdir}/boot/
 	cp -f ${srcdir}/start.elf ${pkgdir}/boot/
 	cp -f ${srcdir}/fixup.dat ${pkgdir}/boot/
+
+	# Copy licenses
+	cp -f ${srcdir}/COPYING.linux ${pkgdir}/boot/
+	cp -f ${srcdir}/LICENCE.broadcom ${pkgdir}/boot/
 }	
 sha512sums="a09e48d4f7ab385eae62c05cbb82b8af02aaa49652e87a5a6b9dc61056094397cdf2d3d6761f56599e6d9d00767f2ce2a3250a558baf9ed6e22e830e4b42903e  rpi2-boot-linux-4.9.33.tar.gz
 5714407a4f155719f7f6ca2225d81fd2a5c5feb384768dd42556dfa6414f9fc254d9b96e9976918233d93543908184c6cb2ea12607c3b21cf5ab00f44be6dded  bootcode.bin
 07c2b09ec11582084cfe9ddb812dc38a5921df45de568dcb0ae3db08704d5ee315aa8e803315a06728b4f419cad94380dc57d593969d0f4e4b71136e90958d0b  start.elf
-37aaef19768fe86e4562b0605d2b949d686b48ebf777e7486d0a70352e0cd05e64dd3d7df6ab24ae43a373ca15ab973a2c9b4692a622bfec94a3c82818324265  fixup.dat"
+37aaef19768fe86e4562b0605d2b949d686b48ebf777e7486d0a70352e0cd05e64dd3d7df6ab24ae43a373ca15ab973a2c9b4692a622bfec94a3c82818324265  fixup.dat
+fbb1e0f29741e900a81ccbe76102103365423d310e9987dfc5858174999911037a9ad48270a3d0b86f245e91868ed73813ca273584be43816f53517858f3aabd  COPYING.linux
+79a18b78ea9868b7053b7607f7d994f71f55458ca6079e883791b3a978d6bd9427d1922394cb570b70f735cb52eb2b25384a4cb11e5b7fb051f318be8acfa91e  LICENCE.broadcom"
