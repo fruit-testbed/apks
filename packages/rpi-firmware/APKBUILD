@@ -1,6 +1,6 @@
 # Maintainer: "fruit <info@fruit-testbed.org>"
-pkgname=rpi-kernel-modules
-pkgver=1.20170811
+pkgname=rpi-firmware
+pkgver=20170811
 pkgrel=0
 pkgdesc="RaspberryPi Firmwares"
 url="https://github.com/RPi-Distro/firmware-nonfree"
