@@ -7,7 +7,14 @@ url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
 makedepends=""
-depends="alpine-baselayout alpine-conf alpine-keys apk-tools busybox busybox-initscripts busybox-suid libc-utils openrc"
+
+depends="alpine-baselayout alpine-conf alpine-keys
+apk-tools busybox busybox-initscripts busybox-suid libc-utils
+openrc mkinitfs openssh openssh-server tzdata kbd-bkeymaps
+bash python e2fsprogs btrfs-progs nfs-utils curl parted
+wireless-tools wpa_supplicant dnsmasq
+docker singularity"
+
 depends_dev=""
 install=""
 subpackages=""
