@@ -63,13 +63,15 @@ overlay:
 	adduser -D $(USER) && \
 		echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers && \
 		addgroup $(USER) abuild && \
-		chown -R $(USER):$(USER) . && \
+		chown $(USER):$(USER) . && \
+		chown $(USER):$(USER) -R packages && \
 		mkdir -p /home/$(USER)/.abuild/ && \
 		cp -f $(KEYFILE) /home/$(USER)/.abuild/ && \
 		chmod 0400 /home/$(USER)/.abuild/$$(basename $(KEYFILE)) && \
 		chown $(USER):$(USER) /home/$(USER)/.abuild/$$(basename $(KEYFILE)) && \
 		echo "PACKAGER_PRIVKEY=/home/fruitdev/.abuild/$$(basename $(KEYFILE))" > /home/$(USER)/.abuild/abuild.conf && \
-		su $(USER) -c 'mkdir -p $(TARGET)/packages/$(ARCH)'
+		mkdir -p $(TARGET)/packages/$(ARCH) && \
+		chown -R $(USER):$(USER) $(TARGET)
 	mkdir -p /var/cache/distfiles && chmod a+w /var/cache/distfiles
 	touch .prepare
 
