@@ -36,7 +36,7 @@ PACKAGES = \
 	rpi-firmware.apk \
 	\
 	fruit-keys.apk \
-	fruit-base.apk \
+	fruit-baselayout.apk \
 
 
 ifeq ($(TARGET),)
@@ -78,10 +78,11 @@ overlay:
 $(TARGET): .prepare $(PACKAGES)
 
 %.apk: .prepare
-	@echo "Building $*..."
 	@if [ -e packages/$*/APKBUILD ]; then \
-		cd packages/$* && abuild -F deps && su $(USER) -c "abuild -P $(TARGET)"; \
+		echo "Building $*..."; \
+		cd packages/$* && abuild -F -P $(TARGET) deps && su $(USER) -c "abuild -P $(TARGET)"; \
 	else \
+		echo "Fetching $*..."; \
 		apk fetch -o $(TARGET)/packages/$(ARCH) -R $*; \
 	fi
 
@@ -90,7 +91,7 @@ sign: $(TARGET)
 	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
 	abuild-sign -q -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 
-apks:
+tgz:
 	cd $(TARGET)/ && tar cvzf fruit-apks.tar.gz packages
 
 
