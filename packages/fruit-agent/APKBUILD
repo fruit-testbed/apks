@@ -1,0 +1,41 @@
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=fruit-agent
+pkgver=0.0.4
+pkgrel=0
+pkgdesc="Fruit Agent"
+url="https://fruit-testbed.org"
+arch="noarch"
+license="BSD"
+depends="busybox openrc"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="${pkgname}-master.zip::https://github.com/fruit-testbed/fruit-agent/archive/master.zip"
+builddir="$srcdir/${pkgname}-master"
+options="suid !check"
+
+prepare() {
+	default_prepare
+}
+
+build() {
+	return 0
+}
+
+package() {
+	mkdir -p ${pkgdir}/usr/bin/
+	install -m755 -o root -g root ${builddir}/JSON.sh ${pkgdir}/usr/bin/JSON.sh
+
+	mkdir -p ${pkgdir}/usr/sbin/
+	install -m750 -o root -g root ${builddir}/fruit-deploy.in ${pkgdir}/usr/sbin/fruit-deploy
+
+	mkdir -p ${pkgdir}/etc/init.d/
+	install -m755 -o root -g root ${builddir}/openrc-fruit.in ${pkgdir}/etc/init.d/fruit
+	
+	mkdir -p ${pkgdir}/etc/runlevels/boot
+	cd ${pkgdir}/etc/runlevels/boot && ln -sf /etc/init.d/fruit fruit
+
+	return 0
+}	
+sha512sums="28d234a548ecf1fda1691493fcc7a5346652b1e57ec1ef10960fbcf548a0194c6b5e581afccf7201d72a2bd21db00f56c6918431cc28add1e8d7af66a89025f0  fruit-agent-master.zip"

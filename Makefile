@@ -37,6 +37,7 @@ PACKAGES = \
 	\
 	fruit-keys.apk \
 	fruit-baselayout.apk \
+	fruit-agent.apk \
 
 
 ifeq ($(TARGET),)
@@ -127,6 +128,14 @@ cleancache:
 				cd $$package && abuild -F cleancache; \
 			fi; \
 		done; \
+	fi
+
+clean.%:
+	@if [ -e packages/$* ]; then \
+		echo "Cleaning $*..."; \
+		cd packages/$* && abuild -F clean && abuild -F cleancache; \
+	else \
+		echo "Package $* does not exist"; \
 	fi
 
 cleanapks:
