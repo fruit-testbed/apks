@@ -47,6 +47,7 @@ package() {
 	mkdir -p "$pkgdir"
 	cd "$pkgdir"
 	install -m 0755 -d \
+		boot \
 		dev \
 		dev/pts \
 		dev/shm \
