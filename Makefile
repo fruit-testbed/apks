@@ -130,6 +130,7 @@ cleancache:
 			fi; \
 		done; \
 	fi
+	@rm -rf /var/cache/distfiles/*
 
 clean.%:
 	@if [ -e packages/$* ]; then \
