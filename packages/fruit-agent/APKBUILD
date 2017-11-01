@@ -24,6 +24,9 @@ build() {
 }
 
 package() {
+	mkdir -p ${pkgdir}/boot
+	install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/boot/fruit.json
+
 	mkdir -p ${pkgdir}/usr/bin/
 	install -m755 -o root -g root ${builddir}/JSON.sh ${pkgdir}/usr/bin/JSON.sh
 
