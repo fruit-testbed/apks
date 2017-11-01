@@ -38,4 +38,4 @@ package() {
 
 	return 0
 }	
-sha512sums="9b9c4228e95d975b6d2821fdeeba70ef789036625a8eb60212adbd298941a9d2dbfe8eeb6e252d697fffa33d7d8a16b5775dc8d35ed4a5fe98431f7bbe88914e  fruit-agent-master.zip"
+sha512sums="15bed24f2fec3db8e4f1c0f0cb56d0bffde9379e9eb1fbb0c024eb6aa9e8b695f10bb93f03b16d86a58cc0412c890c5b650df309ae6408280c9962fc682e1a4a  fruit-agent-master.zip"
