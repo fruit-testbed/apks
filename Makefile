@@ -35,6 +35,10 @@ PACKAGES = \
 	rpi2-boot-linux.apk \
 	rpi-firmware.apk \
 	\
+	rpi-u-boot.apk \
+	rpi2-u-boot.apk \
+	rpi3-u-boot.apk \
+	\
 	fruit-keys.apk \
 	fruit-baselayout.apk \
 	fruit-agent.apk \
@@ -58,6 +62,12 @@ overlay:
 		mount -t overlay -o lowerdir=/usr,upperdir=.usr,workdir=.usr.workdir overlay /usr
 	mkdir -p .etc .etc.workdir && \
 		mount -t overlay -o lowerdir=/etc,upperdir=.etc,workdir=.etc.workdir overlay /etc
+
+clean.overlay:
+	[ "$$(mount | grep ' on /usr ')" = "" ] || umount -f /usr
+	[ "$$(mount | grep ' on /var ')" = "" ] || umount -f /var
+	[ "$$(mount | grep ' on /etc ')" = "" ] || umount -f /etc
+	rm -rf .cache .cache.workdir .usr .usr.workdir .etc .etc.workdir
 
 .prepare:
 	apk update && apk upgrade && apk add alpine-sdk
@@ -106,15 +116,9 @@ clean:
 			fi; \
 		done; \
 	fi
-	@if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ]; then \
-		deluser $(USER); \
-	fi
-	@if [ -e /etc/sudoers ]; then \
-		sed -i 's/^$(USER).*$$//' /etc/sudoers; \
-	fi
-	@if [ $$(mount | grep ' on /var/cache/distfiles ' | wc -l) -ne 0 ]; then \
-		umount -f /var/cache/distfiles; \
-	fi
+	@[ "$$(grep $(USER) /etc/passwd)" = "" ] || deluser $(USER)
+	@[ ! -e /etc/sudoers ] || sed -i 's/^$(USER).*$$//' /etc/sudoers
+	@[ "$$(mount | grep ' on /var/cache/distfiles ')" = "" ] || umount -f /var/cache/distfiles
 	@chown -R $$(id -u -n):$$(id -g -n) .
 	rm -f .prepare
 
