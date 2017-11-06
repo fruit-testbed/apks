@@ -35,10 +35,7 @@ PACKAGES = \
 	rpi2-boot-linux.apk \
 	rpi-firmware.apk \
 	\
-	rpi-u-boot.apk \
-	rpi2-u-boot.apk \
-	rpi3-u-boot.apk \
-	\
+	fruit-u-boot.apk \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
 	fruit-agent.apk \

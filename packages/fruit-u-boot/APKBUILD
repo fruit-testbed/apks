@@ -1,0 +1,83 @@
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=fruit-u-boot
+pkgver=2017.09
+pkgrel=0
+pkgdesc="Das U-Boot"
+url="http://www.denx.de/wiki/U-Boot"
+arch="armhf"
+license="GPL-2.0+"
+depends=""
+depends_dev="gcc make dtc uboot-tools"
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="u-boot-${pkgver}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}
+boot.cmd"
+options="suid !check"
+builddir=$srcdir/u-boot-${pkgver}
+
+prepare() {
+	default_prepare
+}
+
+build() {
+	# build u-boot for rpi 0/1
+	cd ${builddir} && \
+		make rpi_defconfig && \
+		make -j2 && \
+		mv u-boot.bin u-boot-rpi.bin
+	[ $? -ne 0 ] && return 1
+
+	# build u-boot for rpi 2
+	cd ${builddir} && \
+		make rpi_2_defconfig && \
+		make -j2 && \
+		mv u-boot.bin u-boot-rpi2.bin
+	[ $? -ne 0 ] && return 2
+
+	# build u-boot for rpi 3
+	cd ${builddir} && \
+		make rpi_3_32b_defconfig && \
+		make -j2 && \
+		mv u-boot.bin u-boot-rpi3.bin
+	[ $? -ne 0 ] && return 3
+
+	cd ${srcdir} && \
+		mkimage -C none -A arm -T script -d boot.cmd boot.scr
+	return $?
+}
+
+package() {
+	target=${pkgdir}/media/mmcblk0p1
+
+	mkdir -p ${target}
+
+	# install u-boot binaries
+	install -m750 -o root -g root ${builddir}/u-boot-rpi.bin ${target}/u-boot-rpi.bin
+	install -m750 -o root -g root ${builddir}/u-boot-rpi2.bin ${target}/u-boot-rpi2.bin
+	install -m750 -o root -g root ${builddir}/u-boot-rpi3.bin ${target}/u-boot-rpi3.bin
+
+	# install u-boot script
+	install -m640 -o root -g root ${srcdir}/boot.scr ${target}/boot.scr
+
+	# create config.txt
+	cat > ${target}/config.txt <<-EOL
+		disable_splash=1
+		boot_delay=0
+		gpu_mem=256
+		gpu_mem_256=64
+		enable_uart=1
+		[pi0]
+		kernel=u-boot-rpi.bin
+		[pi1]
+		kernel=u-boot-rpi.bin
+		[pi2]
+		kernel=u-boot-rpi2.bin
+		[pi3]
+		kernel=u-boot-rpi3.bin
+		[all]
+		include usercfg.txt
+	EOL
+}
+sha512sums="8dac192d42f3d0883b0daea9cfc0423315ca372cac977b87d1edb5a4834bc3a83455e4d15f3c9d74dba5413c0f657c83da1136148fb0e7171d2f42c64276f1cc  u-boot-2017.09.zip
+f384f317072fbba51458813ea5b19d8fb6628b5bd3846c3a5706146533ef74b4c3d9e69a3b1fe0d04be44a6bbd420c7b561051a6799301a541fc62ce3f512892  boot.cmd"
