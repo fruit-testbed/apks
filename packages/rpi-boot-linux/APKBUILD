@@ -11,12 +11,13 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
+rpiversion="1.20171029"
 source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/v3.6/main/armhf/linux-rpi-${pkgver}-r${pkgrel}.apk
-bootcode.bin::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/bootcode.bin
-start.elf::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/start.elf
-fixup.dat::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/fixup.dat
-COPYING.linux::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/COPYING.linux
-LICENCE.broadcom::https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/LICENCE.broadcom
+bootcode.bin::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/bootcode.bin
+start.elf::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/start.elf
+fixup.dat::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/fixup.dat
+COPYING.linux::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/COPYING.linux
+LICENCE.broadcom::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/LICENCE.broadcom
 "
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="!strip suid !check"
@@ -43,6 +44,11 @@ package() {
 	cp -rf ${srcdir}/usr/lib/linux-${version}/overlays ${pkgdir}/boot/
 	# Remove redundant overlay files and then create a soft link
 	cd ${pkgdir}/usr/lib/linux-${version} && rm -rf overlays && ln -sf /boot/overlays overlays
+	# Remove unused files
+	rm -f ${pkgdir}/boot/System.map-rpi ${pkgdir}/boot/config-rpi
+
+	# Rename vmlinuz-rpi to vmlinuz
+	mv ${pkgdir}/boot/vmlinuz-rpi ${pkgdir}/boot/vmlinuz
 
 	# Copy RaspberryPi 0/1 .dtb files into /boot
 	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2835-rpi-*.dtb ${pkgdir}/boot/
