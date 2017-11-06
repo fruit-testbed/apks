@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
-pkgver=0.0.4
+pkgver=0.0.1
 pkgrel=0
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
@@ -24,8 +24,8 @@ build() {
 }
 
 package() {
-	mkdir -p ${pkgdir}/boot
-	install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/boot/fruit.json
+	mkdir -p ${pkgdir}/media/mmcblk0p1
+	install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/media/mmcblk0p1/fruit.json
 
 	mkdir -p ${pkgdir}/usr/bin/
 	install -m755 -o root -g root ${builddir}/JSON.sh ${pkgdir}/usr/bin/JSON.sh
@@ -42,4 +42,4 @@ package() {
 
 	return 0
 }	
-sha512sums="e271111e620a065852ce9b7a9aa59e608c9b271a54e341de84fcfa841bda47ff1942e7e01fe349b17a0ab778bce67aa71eebaf35ad0eec1b1ef551b7000c420b  fruit-agent-master.zip"
+sha512sums="b4f2270b6aa3ae8263c69f35547bd358b0818e44b848df1c9e50d956426a9e20c6348402ca6809da17d62763979da3c45c20041517f2efcd3d472806bccccfef  fruit-agent-master.zip"

@@ -31,7 +31,7 @@ build() {
 }
 
 package() {
-	mkdir -p ${pkgdir}
+	mkdir -p ${pkgdir}/media/mmcblk0p1
 
 	# Get Linux kernel version
 	version=$(cat ${srcdir}/usr/share/kernel/rpi2/kernel.release)
@@ -40,29 +40,30 @@ package() {
 	cp -rf ${srcdir}/usr ${pkgdir}/
 	cp -rf ${srcdir}/lib ${pkgdir}/
 
-	# Copy device tree overlays into /boot
-	cp -rf ${srcdir}/usr/lib/linux-${version}/overlays ${pkgdir}/boot/
+	# Copy device tree overlays into /media/mmcblk0p1
+	cp -rf ${srcdir}/usr/lib/linux-${version}/overlays ${pkgdir}/media/mmcblk0p1/
 	# Remove redundant overlay files and then create a soft link
-	cd ${pkgdir}/usr/lib/linux-${version} && rm -rf overlays && ln -sf /boot/overlays overlays
+	cd ${pkgdir}/usr/lib/linux-${version} && rm -rf overlays && ln -sf /media/mmcblk0p1/overlays overlays
+
 	# Remove unused files
 	rm -f ${pkgdir}/boot/System.map-rpi2 ${pkgdir}/boot/config-rpi2
 
 	# Rename vmlinuz-rpi2 to vmlinuz
 	mv ${pkgdir}/boot/vmlinuz-rpi2 ${pkgdir}/boot/vmlinuz
 
-	# Copy RaspberryPi 2/3 .dtb files into /boot
-	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2836-rpi-*.dtb ${pkgdir}/boot/
-	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2709-rpi-*.dtb ${pkgdir}/boot/
-	cp -rf ${srcdir}/usr/lib/linux-${version}/bcm2710-rpi-*.dtb ${pkgdir}/boot/
+	# Copy RaspberryPi 2/3 .dtb files into /media/mmcblk0p1
+	cp -f ${srcdir}/usr/lib/linux-${version}/bcm2836-rpi-*.dtb ${pkgdir}/media/mmcblk0p1/
+	cp -f ${srcdir}/usr/lib/linux-${version}/bcm2709-rpi-*.dtb ${pkgdir}/media/mmcblk0p1/
+	cp -f ${srcdir}/usr/lib/linux-${version}/bcm2710-rpi-*.dtb ${pkgdir}/media/mmcblk0p1/
 
-	# Copy bootloaders into /boot
-	cp -f ${srcdir}/bootcode.bin ${pkgdir}/boot/
-	cp -f ${srcdir}/start.elf ${pkgdir}/boot/
-	cp -f ${srcdir}/fixup.dat ${pkgdir}/boot/
+	# Copy bootloaders into /media/mmcblk0p1
+	cp -f ${srcdir}/bootcode.bin ${pkgdir}/media/mmcblk0p1/
+	cp -f ${srcdir}/start.elf ${pkgdir}/media/mmcblk0p1/
+	cp -f ${srcdir}/fixup.dat ${pkgdir}/media/mmcblk0p1/
 
 	# Copy licenses
-	cp -f ${srcdir}/COPYING.linux ${pkgdir}/boot/
-	cp -f ${srcdir}/LICENCE.broadcom ${pkgdir}/boot/
+	cp -f ${srcdir}/COPYING.linux ${pkgdir}/media/mmcblk0p1/
+	cp -f ${srcdir}/LICENCE.broadcom ${pkgdir}/media/mmcblk0p1/
 }	
 sha512sums="a09e48d4f7ab385eae62c05cbb82b8af02aaa49652e87a5a6b9dc61056094397cdf2d3d6761f56599e6d9d00767f2ce2a3250a558baf9ed6e22e830e4b42903e  rpi2-boot-linux-4.9.33.tar.gz
 5714407a4f155719f7f6ca2225d81fd2a5c5feb384768dd42556dfa6414f9fc254d9b96e9976918233d93543908184c6cb2ea12607c3b21cf5ab00f44be6dded  bootcode.bin
