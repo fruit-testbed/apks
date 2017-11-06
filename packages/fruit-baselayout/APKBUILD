@@ -73,9 +73,8 @@ package() {
 		home \
 		lib/firmware \
 		lib/mdev \
-		media/cdrom \
-		media/floppy \
 		media/usb \
+		media/mmcblk0p1 \
 		mnt \
 		proc \
 		run \
@@ -137,7 +136,7 @@ package() {
 		kernel.panic = 120
 	EOF
 	cat > "$pkgdir"/etc/fstab <<-EOF
-		/dev/mmcblk0p1	/boot		vfat	defaults 0 0
+		/dev/mmcblk0p1	/media/mmcblk0p1	vfat	defaults,ro 0 0
 		/dev/usbdisk	/media/usb	vfat	noauto,ro 0 0
 	EOF
 
