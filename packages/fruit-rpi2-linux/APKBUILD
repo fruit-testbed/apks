@@ -1,5 +1,5 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
-pkgname=rpi2-boot-linux
+pkgname=fruit-rpi2-linux
 pkgver=4.9.33
 pkgrel=0
 pkgdesc="Boot and Linux Kernel for RaspberryPi 2/3"
