@@ -31,8 +31,9 @@ PACKAGES = \
 	raspberrypi.apk \
 	mkinitfs.apk \
 	\
-	rpi-boot-linux.apk \
-	rpi2-boot-linux.apk \
+	fruit-rpi-bootloader.apk \
+	fruit-rpi-linux.apk \
+	fruit-rpi2-linux.apk \
 	rpi-firmware.apk \
 	\
 	fruit-u-boot.apk \
