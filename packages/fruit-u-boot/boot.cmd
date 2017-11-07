@@ -1,18 +1,3 @@
-if test "${board_revision}" = "0xA02082";
-then
-	setenv fdtfile bcm2710-rpi-3-b.dtb;
-elif test "${board_revision}" = "0xA22082";
-then
-	setenv fdtfile bcm2710-rpi-3-b.dtb;
-elif test "${board_revision}" = "0xA32082";
-then
-	setenv fdtfile bcm2710-rpi-3-b.dtb;
-elif test "${board_revision}" = "0xA020A0";
-then
-	setenv fdtfile bcm2710-rpi-cm3.dtb;
-else
-	setenv fdtfile bcm2709-rpi-2-b.dtb;
-fi;
 setenv kernel vmlinuz;
 setenv ramdisk initramfs;
 setenv boot_prefix /boot;
@@ -43,10 +28,12 @@ then
 else
 	setenv bootargs "${bootargs_default} overlaytmpfs";
 fi;
-fatload mmc 0:1 0x2000000 ${fdtfile};
 ext4load mmc ${root_part} ${kernel_addr_r} ${boot_prefix}/${kernel};
 ext4load mmc ${root_part} ${ramdisk_addr_r} ${boot_prefix}/${ramdisk};
-if bootz ${kernel_addr_r} ${ramdisk_addr_r} 0x2000000;
+echo "set root_dev=${root_dev}";
+echo "set bootargs=${bootargs}";
+sleep 2;
+if bootz ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr};
 then
 	true;
 else
