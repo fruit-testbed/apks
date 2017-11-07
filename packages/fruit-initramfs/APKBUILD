@@ -1,0 +1,28 @@
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=fruit-initramfs
+pkgver=0.0.1
+pkgrel=0
+pkgdesc="Linux Initramfs with U-Boot"
+url="http://fruit-testbed.org"
+arch="armhf"
+license="BSD"
+depends="mkinitfs uboot-tools"
+depends_dev=""
+makedepends="$depends_dev"
+install="$pkgname.post-install $pkgname.post-upgrade"
+subpackages=""
+source="initramfs-init"
+builddir="$srcdir/${pkgname}-${pkgver}"
+options="!strip suid !check"
+
+prepare() {
+	default_prepare
+}
+
+build() {
+	return 0
+}
+
+package() {
+	install -D -m640 -o root -g root ${srcdir}/initramfs-init ${pkgdir}/usr/share/fruit/
+}
