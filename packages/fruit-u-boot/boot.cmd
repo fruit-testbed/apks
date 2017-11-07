@@ -50,5 +50,8 @@ if bootz ${kernel_addr_r} ${ramdisk_addr_r} 0x2000000;
 then
 	true;
 else
+	echo "Failed to boot Linux kernel root_dev=${root_dev}";
+	echo "The system will reboot in 5 seconds";
+	sleep 5;
 	reset;
 fi;
