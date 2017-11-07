@@ -1,5 +1,5 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
-pkgname=rpi-bootloader
+pkgname=fruit-rpi-bootloader
 pkgver=1.20171029
 pkgrel=0
 pkgdesc="Raspberry Pi Foundation Boot Loader"
