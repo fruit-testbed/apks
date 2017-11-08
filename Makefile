@@ -96,6 +96,9 @@ $(TARGET): .prepare $(PACKAGES)
 		apk fetch -o $(TARGET)/packages/$(ARCH) -R $*; \
 	fi
 
+%.checksum: .prepare
+	cd packages/$* && su $(USER) -c 'abuild checksum'
+
 sign: $(TARGET)
 	rm -f $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
