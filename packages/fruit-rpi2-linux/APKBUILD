@@ -36,21 +36,12 @@ package() {
 	cp -rf ${srcdir}/usr ${pkgdir}/
 	cp -rf ${srcdir}/lib ${pkgdir}/
 
-	# Copy device tree overlays into /media/mmcblk0p1
-	cp -rf ${srcdir}/usr/lib/linux-${version}/overlays ${pkgdir}/media/mmcblk0p1/
-	# Remove redundant overlay files and then create a soft link
-	cd ${pkgdir}/usr/lib/linux-${version} && rm -rf overlays && ln -sf /media/mmcblk0p1/overlays overlays
-
 	# Remove unused files
+	rm -rf ${pkgdir}/usr/lib/linux-${version}
 	rm -f ${pkgdir}/boot/System.map-rpi2 ${pkgdir}/boot/config-rpi2
 
 	# Rename vmlinuz-rpi2 to vmlinuz
 	mv ${pkgdir}/boot/vmlinuz-rpi2 ${pkgdir}/boot/vmlinuz
-
-	# Copy RaspberryPi 2/3 .dtb files into /media/mmcblk0p1
-	cp -f ${srcdir}/usr/lib/linux-${version}/bcm2836-rpi-*.dtb ${pkgdir}/media/mmcblk0p1/
-	cp -f ${srcdir}/usr/lib/linux-${version}/bcm2709-rpi-*.dtb ${pkgdir}/media/mmcblk0p1/
-	cp -f ${srcdir}/usr/lib/linux-${version}/bcm2710-rpi-*.dtb ${pkgdir}/media/mmcblk0p1/
 
 	# Copy license
 	cp -f ${srcdir}/COPYING.linux ${pkgdir}/media/mmcblk0p1/
