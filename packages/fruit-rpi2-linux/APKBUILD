@@ -27,8 +27,6 @@ build() {
 }
 
 package() {
-	mkdir -p ${pkgdir}/media/mmcblk0p1
-
 	# Get Linux kernel version
 	version=$(cat ${srcdir}/usr/share/kernel/rpi2/kernel.release)
 
@@ -37,7 +35,7 @@ package() {
 	cp -rf ${srcdir}/lib ${pkgdir}/
 
 	# Remove unused files
-	rm -rf ${pkgdir}/usr/lib/linux-${version}
+	rm -rf ${pkgdir}/usr/lib
 	rm -f ${pkgdir}/boot/System.map-rpi2 ${pkgdir}/boot/config-rpi2
 
 	# Rename vmlinuz-rpi2 to vmlinuz
