@@ -30,12 +30,13 @@ PACKAGES = \
 	util-linux.apk \
 	raspberrypi.apk \
 	mkinitfs.apk \
+	uboot-tools.apk \
 	\
 	fruit-rpi-bootloader.apk \
 	fruit-rpi-linux.apk \
 	fruit-rpi2-linux.apk \
 	rpi-firmware.apk \
-	\
+	fruit-initramfs.apk \
 	fruit-u-boot.apk \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
