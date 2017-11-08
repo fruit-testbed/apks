@@ -24,5 +24,7 @@ build() {
 }
 
 package() {
-	install -D -m640 -o root -g root ${srcdir}/initramfs-init ${pkgdir}/usr/share/fruit/
+	mkdir -p ${pkgdir}/usr/share/fruit/
+	install -m640 -o root -g root ${srcdir}/initramfs-init ${pkgdir}/usr/share/fruit/
 }
+sha512sums="d526ababda56a0048e17df6e42ad1aac1bc99203363f47e28c661cc4ce1f2b6543780d6d77e2f3932998f50283ab9d0b8197ab6cd31be7d25218a15634267840  initramfs-init"

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+kernelversion=$(ls -t /lib/modules | grep '^[0-9]' | tail -1)
+
+/sbin/mkinitfs -i /usr/share/fruit/initramfs-init -o /boot/initramfs.cpio ${kernelversion}
+mkimage -A arm -T ramdisk -C none -n initramfs -d /boot/initramfs.cpio /boot/initramfs
+rm -f /boot/initramfs.cpio
