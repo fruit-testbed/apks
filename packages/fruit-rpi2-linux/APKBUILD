@@ -34,10 +34,6 @@ package() {
 	cp -rf ${srcdir}/usr ${pkgdir}/
 	cp -rf ${srcdir}/lib ${pkgdir}/
 
-	# Remove unused files
-	rm -rf ${pkgdir}/usr/lib
-	rm -f ${pkgdir}/boot/System.map-rpi2 ${pkgdir}/boot/config-rpi2
-
 	# Rename vmlinuz-rpi2 to vmlinuz
 	mv ${pkgdir}/boot/vmlinuz-rpi2 ${pkgdir}/boot/vmlinuz
 
