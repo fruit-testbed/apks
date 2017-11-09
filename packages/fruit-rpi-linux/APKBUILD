@@ -27,6 +27,8 @@ build() {
 }
 
 package() {
+	mkdir -p ${pkgdir}
+
 	# Get Linux kernel version
 	version=$(cat ${srcdir}/usr/share/kernel/rpi/kernel.release)
 
