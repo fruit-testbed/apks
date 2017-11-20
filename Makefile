@@ -82,9 +82,13 @@ clean.overlay:
 		echo "PACKAGER_PRIVKEY=/home/fruitdev/.abuild/$$(basename $(KEYFILE))" > /home/$(USER)/.abuild/abuild.conf && \
 		mkdir -p $(TARGET)/packages/$(ARCH) && \
 		chown -R $(USER):$(USER) $(TARGET)
-	addgroup root abuild
+	addgroup $(shell id -un) abuild
 	mkdir -p /var/cache/distfiles && chmod a+w /var/cache/distfiles
 	touch .prepare
+	@if [ "$$(id | grep '(abuild)')" = "" ]; then \
+		echo "$$(id -un) is not belong to group abuild. Please logout and login again!"; \
+		exit 1; \
+	fi
 
 $(TARGET): .prepare $(PACKAGES)
 
