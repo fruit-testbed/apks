@@ -31,6 +31,7 @@ PACKAGES = \
 	raspberrypi.apk \
 	mkinitfs.apk \
 	uboot-tools.apk \
+	tlsdate.apk \
 	\
 	fruit-rpi-bootloader.apk \
 	fruit-rpi-linux.apk \
