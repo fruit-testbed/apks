@@ -41,7 +41,7 @@ ntp:x:123:
 nofiles:x:200:
 smmsp:x:209:smmsp
 locate:x:245:
-abuild:x:300:
+abuild:x:300:root
 tlsdate:x:399:
 utmp:x:406:
 ping:x:999:
