@@ -1,38 +1,12 @@
 .PHONY: build sign clean
 
 TARGET = $(shell pwd)/target
-KEYFILE = $(shell pwd)/fruit-apk-key.rsa
+KEYFILE = $(shell pwd)/fruit-apk-key-20170922.rsa
 USER = fruitdev
 ARCH = armhf
 
+
 PACKAGES = \
-	alpine-base.apk \
-	tzdata.apk \
-	kbd-bkeymaps.apk \
-	wireless-tools.apk \
-	wpa_supplicant.apk \
-	openssh.apk \
-	openssh-server.apk \
-	curl.apk \
-	dnsmasq.apk \
-	nfs-utils.apk \
-	qemu.apk \
-	docker.apk \
-	openvpn.apk \
-	btrfs-progs.apk \
-	parted.apk \
-	singularity.apk \
-	bash.apk \
-	python.apk \
-	e2fsprogs.apk \
-	abuild.apk \
-	sfdisk.apk \
-	util-linux.apk \
-	raspberrypi.apk \
-	mkinitfs.apk \
-	uboot-tools.apk \
-	tlsdate.apk \
-	\
 	fruit-rpi-bootloader.apk \
 	fruit-rpi-linux.apk \
 	fruit-rpi2-linux.apk \
@@ -42,6 +16,8 @@ PACKAGES = \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
 	fruit-agent.apk \
+	singularity.apk \
+	uboot-tools.apk \
 
 
 ifeq ($(TARGET),)
