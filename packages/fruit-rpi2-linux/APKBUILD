@@ -1,6 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-rpi2-linux
-pkgver=4.9.33
+alpinever=3.7
+pkgver=4.9.65
 rpilinuxversion=rpi-4.9.y
 pkgrel=0
 pkgdesc="Linux Kernel for RaspberryPi 2/3"
@@ -12,7 +13,7 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/v3.6/main/armhf/linux-rpi2-${pkgver}-r${pkgrel}.apk
+source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/v${alpinever}/main/armhf/linux-rpi2-${pkgver}-r${pkgrel}.apk
 COPYING.linux::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/COPYING.linux
 "
 builddir="$srcdir/${pkgname}-${pkgver}"
@@ -42,5 +43,5 @@ package() {
 	# Copy license
 	cp -f ${srcdir}/COPYING.linux ${pkgdir}/boot/
 }	
-sha512sums="a09e48d4f7ab385eae62c05cbb82b8af02aaa49652e87a5a6b9dc61056094397cdf2d3d6761f56599e6d9d00767f2ce2a3250a558baf9ed6e22e830e4b42903e  fruit-rpi2-linux-4.9.33.tar.gz
+sha512sums="7a220cedade2cc1ebfacf7e22a850cbbe839fb12a893e7067efaf2f7245c9f5737a5ac8ee39bd9b8b571471a90141915c2596d2f52c17df9f04a0790cb6ad053  fruit-rpi2-linux-4.9.65.tar.gz
 fbb1e0f29741e900a81ccbe76102103365423d310e9987dfc5858174999911037a9ad48270a3d0b86f245e91868ed73813ca273584be43816f53517858f3aabd  COPYING.linux"
