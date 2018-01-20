@@ -10,7 +10,7 @@ depends=""
 makedepends=""
 install=""
 subpackages=""
-source="fruit-apk-key.rsa.pub"
+source="fruit-apk-key-20170922.rsa.pub"
 options="!check"
 
 build() {
@@ -24,4 +24,4 @@ package() {
 	done
 }
 
-sha512sums="5afa51980d231c17c9ee2612329d4ab5bcff86c138c691812ede85f68c1e05eb6171c8555bf8415070692a8a5a5c5ee700ba530d054ad8e995ffe08d479e8b76  fruit-apk-key.rsa.pub"
+sha512sums="5afa51980d231c17c9ee2612329d4ab5bcff86c138c691812ede85f68c1e05eb6171c8555bf8415070692a8a5a5c5ee700ba530d054ad8e995ffe08d479e8b76  fruit-apk-key-20170922.rsa.pub"
