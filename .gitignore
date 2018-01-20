@@ -8,6 +8,7 @@
 /.etc*
 /.usr*
 /.var*
+/*.rsa
 
 # VIM temporary file
 .*.swp
