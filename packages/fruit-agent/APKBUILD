@@ -35,7 +35,7 @@ package() {
 	install -m750 -o root -g root ${builddir}/fruit-monitor.in ${pkgdir}/usr/sbin/fruit-monitor
 
 	mkdir -p ${pkgdir}/etc/init.d/
-	install -m755 -o root -g root ${builddir}/openrc-fruit.in ${pkgdir}/etc/init.d/fruit
+	install -m755 -o root -g root ${builddir}/fruit.openrc ${pkgdir}/etc/init.d/fruit
 	
 	mkdir -p ${pkgdir}/etc/runlevels/boot
 	cd ${pkgdir}/etc/runlevels/boot && ln -sf /etc/init.d/fruit fruit
