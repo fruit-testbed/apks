@@ -11,13 +11,13 @@ PACKAGES = \
 	fruit-rpi-linux.apk \
 	fruit-rpi2-linux.apk \
 	rpi-firmware.apk \
+	uboot-tools.apk \
 	fruit-initramfs.apk \
 	fruit-u-boot.apk \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
 	fruit-agent.apk \
 	singularity.apk \
-	uboot-tools.apk \
 
 
 ifeq ($(TARGET),)
