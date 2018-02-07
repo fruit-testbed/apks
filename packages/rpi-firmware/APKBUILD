@@ -11,9 +11,8 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="brcmfmac43430-sdio.bin::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/brcm80211/brcm/brcmfmac43430-sdio.bin
-brcmfmac43430-sdio.txt::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/brcm80211/brcm/brcmfmac43430-sdio.txt
-brcm-LICENSE::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/brcm80211/LICENSE"
+source="brcmfmac43430-sdio.bin::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/brcm/brcmfmac43430-sdio.bin
+LICENCE.broadcom_bcm43xx::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/LICENCE.broadcom_bcm43xx"
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="!strip suid !check"
 
@@ -28,9 +27,5 @@ build() {
 package() {
 	mkdir -p ${pkgdir}/lib/firmware/brcm
 	cp -f ${srcdir}/brcmfmac43430-sdio.bin ${pkgdir}/lib/firmware/brcm/
-	cp -f ${srcdir}/brcmfmac43430-sdio.txt ${pkgdir}/lib/firmware/brcm/
-	cp -f ${srcdir}/brcm-LICENSE ${pkgdir}/lib/firmware/brcm/LICENSE
-}	
-sha512sums="6751470a48e0225731d91ab33464eaeac86da3e10dcf63a85ae0aeea6fa114ab01567fda08604e500c54bb14d38578f6c0b135c7772597d07b5ebda1e662b935  brcmfmac43430-sdio.bin
-bd6417ada7dbb940e75f43d85d9778f362f6c2801b27b4e13043eebfb5f38da4e728bdfe7240304d0ad172ba8ac1a3eff4df40119317093ea19ae23333819024  brcmfmac43430-sdio.txt
-345a081c0df701028f7177856881cdba0a4111d11f3b828397fc92a69e87a427d923cf8b8ff5075e3118d94e73726c0a4220c01658b844e8ae1f84b3a74eeba9  brcm-LICENSE"
+	cp -f ${srcdir}/LICENCE.broadcom_bcm43xx ${pkgdir}/lib/firmware/brcm/LICENCE.broadcom_bcm43xx
+}
