@@ -1,6 +1,6 @@
 # Maintainer: "fruit <info@fruit-testbed.org>"
 pkgname=rpi-firmware
-pkgver=20170811
+pkgver=20180110
 pkgrel=0
 pkgdesc="RaspberryPi Firmwares"
 url="https://github.com/RPi-Distro/firmware-nonfree"
@@ -11,8 +11,7 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="brcmfmac43430-sdio.bin::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/brcm/brcmfmac43430-sdio.bin
-LICENCE.broadcom_bcm43xx::https://raw.githubusercontent.com/RPi-Distro/firmware-nonfree/master/LICENCE.broadcom_bcm43xx"
+source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/edge/main/armhf/linux-firmware-brcm-${pkgver}-r${pkgrel}.apk"
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="!strip suid !check"
 
@@ -26,6 +25,5 @@ build() {
 
 package() {
 	mkdir -p ${pkgdir}/lib/firmware/brcm
-	cp -f ${srcdir}/brcmfmac43430-sdio.bin ${pkgdir}/lib/firmware/brcm/
-	cp -f ${srcdir}/LICENCE.broadcom_bcm43xx ${pkgdir}/lib/firmware/brcm/LICENCE.broadcom_bcm43xx
+	cp -f ${srcdir}/lib/firmware/brcm/*brcmfmac43430* ${pkgdir}/lib/firmware/brcm
 }
