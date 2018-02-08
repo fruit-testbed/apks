@@ -18,6 +18,7 @@ PACKAGES = \
 	fruit-baselayout.apk \
 	fruit-agent.apk \
 	singularity.apk \
+	openvpn.apk \
 
 
 ifeq ($(TARGET),)
