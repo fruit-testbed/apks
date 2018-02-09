@@ -1,0 +1,29 @@
+# Maintainer: "Herry <herry13@gmail.com>"
+pkgname=apk-repositories
+pkgver=20180209
+pkgrel=0
+pkgdesc="APK Repositories"
+url="https://github.com/fruit-testbed/fruitos"
+arch="noarch"
+license="BSD"
+depends=""
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="repositories"
+builddir="$srcdir/${pkgname}-${pkgver}"
+options="!check"
+
+prepare() {
+	default_prepare
+}
+
+build() {
+	return 0
+}
+
+package() {
+	mkdir -p ${pkgdir}/etc/apk
+	install -m640 -o root -g root ${srcdir}/repositories ${pkgdir}/etc/apk
+}
