@@ -31,7 +31,7 @@ package() {
 	install -m755 -o root -g root ${builddir}/JSON.sh ${pkgdir}/usr/bin/JSON.sh
 
 	mkdir -p ${pkgdir}/usr/sbin/
-	install -m750 -o root -g root ${builddir}/fruit-deploy.in ${pkgdir}/usr/sbin/fruit-deploy
+	install -m750 -o root -g root ${builddir}/fruit-config.in ${pkgdir}/usr/sbin/fruit-config
 	install -m750 -o root -g root ${builddir}/fruit-monitor.in ${pkgdir}/usr/sbin/fruit-monitor
 
 	mkdir -p ${pkgdir}/etc/init.d/
@@ -44,4 +44,4 @@ package() {
 
 	return 0
 }
-sha512sums="c92fd7ecdf3bb876bf31b3a443ff650ea869305f29a577bdda4b33b98f4c49eac68bd52826d307176d2959cde4f15db7400a9516a0bd3bbeea3cd5dde4cc40fb  fruit-agent-master.zip"
+sha512sums="ed619d6e2e5c72470108e81ad09dc25689a8c4c8fe1997992bb4c59aaf22e74774dd9c3f385b75ae21c81dfe5ba918c21eeafc218d134b7144626b8bb0b5f326  fruit-agent-master.zip"
