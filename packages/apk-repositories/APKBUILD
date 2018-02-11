@@ -27,3 +27,4 @@ package() {
 	mkdir -p ${pkgdir}/etc/apk
 	install -m640 -o root -g root ${srcdir}/repositories ${pkgdir}/etc/apk
 }
+sha512sums="7fc44af38da2fcd88763392eb71597b8a2c216ad189dff7c076844cf8dcae4f790ec020a02d573faa93d0a545c08f34d3ff78b068abdad21e6311c8d26dbacab  repositories"

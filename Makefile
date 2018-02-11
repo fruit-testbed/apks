@@ -19,7 +19,7 @@ PACKAGES = \
 	fruit-agent.apk \
 	singularity.apk \
 	openvpn.apk \
-	apk-repositories \
+	apk-repositories.apk \
 
 
 ifeq ($(TARGET),)
