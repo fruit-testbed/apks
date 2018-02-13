@@ -33,6 +33,7 @@ package() {
 	mkdir -p ${pkgdir}/usr/sbin/
 	install -m750 -o root -g root ${builddir}/fruit-config.in ${pkgdir}/usr/sbin/fruit-config
 	install -m750 -o root -g root ${builddir}/fruit-monitor.in ${pkgdir}/usr/sbin/fruit-monitor
+	install -m750 -o root -g root ${builddir}/fruit-update.in ${pkgdir}/usr/sbin/fruit-update
 
 	mkdir -p ${pkgdir}/etc/init.d/
 	install -m755 -o root -g root ${builddir}/fruit-boot.openrc ${pkgdir}/etc/init.d/fruit-boot
@@ -44,4 +45,4 @@ package() {
 
 	return 0
 }
-sha512sums="ed619d6e2e5c72470108e81ad09dc25689a8c4c8fe1997992bb4c59aaf22e74774dd9c3f385b75ae21c81dfe5ba918c21eeafc218d134b7144626b8bb0b5f326  fruit-agent-master.zip"
+sha512sums="16ec284b8ca89e0e021e9965ac68ea2789647c60b9f2da18750a49ade34c7882e8e52be063245a317062e0f5b8273b8382672028e8516cd2f20eadca5df497c2  fruit-agent-master.zip"
