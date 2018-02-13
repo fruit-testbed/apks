@@ -12,11 +12,17 @@ then
 	then
 		echo "=== Setting /dev/mmcblk0p3 as root ===";
 		setenv root_dev /dev/mmcblk0p3;
+		setenv next_root_dev /dev/mmcblk0p2;
 		setenv root_part "0:3";
+		setenv dirty_flag .dev.mmcblk0p3.dirty;
+		setenv next_dirty_flag .dev.mmcblk0p2.dirty;
 	else
 		echo "=== Setting /dev/mmcblk0p2 as root ===";
 		setenv root_dev /dev/mmcblk0p2;
+		setenv next_root_dev /dev/mmcblk0p3;
 		setenv root_part "0:2";
+		setenv dirty_flag .dev.mmcblk0p2.dirty;
+		setenv next_dirty_flag .dev.mmcblk0p3.dirty;
 	fi;
 else
 	echo "=== Failed reading boot-root.env, setting /dev/mmcblk0p2 as root ===";
@@ -27,6 +33,20 @@ echo "=== Saving boot root device to boot-root.env ===";
 mw ${env_addr_r} 0x20 0x100;
 env export -t ${env_addr_r} root_dev;
 fatwrite mmc 0:1 ${env_addr_r} ${env_file} 24;
+echo "=== Check dirty flag: ${dirty_flag} ===";
+if fatload mmc 0:1 ${env_addr_r} ${dirty_flag};
+then
+	echo "=== ERROR: Root partition ${root_dev} is dirty ===";
+	if flatload mmc 0:1 ${env_addr_r} ${next_dirty_flag};
+	then
+		echo "=== WARNING: Next root partition ${next_root_dev} is dirty as well ===";
+	else
+		echo "=== Next root partition ${next_root_dev} is clean ===";
+	fi;
+	echo "=== The system will reboot in 5 seconds ===";
+	sleep 5;
+	reset;
+fi;
 echo "=== Setting default boot parameters ===";
 setenv bootargs_default "8250.nr_uarts=1 console=ttyAMA0,115200 console=tty1 noquite cgroup_enable=cpuset panic=5 loglevel=7 dwc_otg.lpm_enable=0 root=${root_dev} rootfstype=ext4 overlaytmpfs"
 setenv bootargs "${bootargs_default}";
