@@ -102,7 +102,6 @@ package() {
 		var/spool \
 		var/spool/cron
 
-	ln -s /run "$pkgdir"/var/run
 	ln -s /media/data "$pkgdir"/data
 	install -d -m 0555 var/empty
 	install -d -m 0700 "$pkgdir"/root
