@@ -75,6 +75,8 @@ package() {
 		lib/mdev \
 		media/usb \
 		media/mmcblk0p1 \
+		media/data \
+		media/non-active \
 		mnt \
 		proc \
 		run \
@@ -100,7 +102,8 @@ package() {
 		var/spool \
 		var/spool/cron
 
-	ln -s /run var/run
+	ln -s /run "$pkgdir"/var/run
+	ln -s /media/data "$pkgdir"/data
 	install -d -m 0555 var/empty
 	install -d -m 0700 "$pkgdir"/root
 	install -d -m 1777 "$pkgdir"/tmp "$pkgdir"/var/tmp
