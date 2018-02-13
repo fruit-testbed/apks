@@ -15,7 +15,7 @@ for i in /etc/modprobe.d/*; do
 done
 
 # migrate /var/run directory to /run
-if [ -d /var/run ]; then
+if [ ! -L /var/run ]; then
 	cp -a /var/run/* /run 2>/dev/null
 	rm -rf /var/run
 	ln -s ../run /var/run
