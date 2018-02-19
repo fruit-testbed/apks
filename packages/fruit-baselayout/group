@@ -44,6 +44,7 @@ locate:x:245:
 abuild:x:300:root
 tlsdate:x:399:
 utmp:x:406:
+docker:x:899:
 ping:x:999:
 nogroup:x:65533:
 nobody:x:65534:
