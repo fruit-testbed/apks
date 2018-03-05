@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
 pkgver=0.0.8
-pkgrel=0
+pkgrel=1
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
