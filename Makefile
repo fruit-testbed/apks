@@ -59,7 +59,7 @@ clean.overlay:
 	rm -rf .cache .cache.workdir .usr .usr.workdir .etc .etc.workdir
 
 .prepare:
-	apk update && apk upgrade && apk add alpine-sdk
+	apk update && apk upgrade && apk add alpine-sdk rsync
 	adduser -D $(USER) && \
 		echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers && \
 		addgroup $(USER) abuild && \
