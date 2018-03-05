@@ -6,13 +6,13 @@ pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
-depends="busybox openrc"
+depends="busybox openrc sipcalc"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-master.zip::https://github.com/fruit-testbed/fruit-agent/archive/master.zip"
-builddir="$srcdir/${pkgname}-master"
+source="${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/fruit-agent/zip/v${pkgver}"
+builddir="$srcdir/${pkgname}-${pkgver}"
 options="suid !check"
 
 prepare() {
@@ -25,7 +25,7 @@ build() {
 
 package() {
 	mkdir -p ${pkgdir}/media/mmcblk0p1
-	install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/media/mmcblk0p1/fruit.json
+	#install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/media/mmcblk0p1/fruit.json
 
 	mkdir -p ${pkgdir}/usr/bin/
 	install -m755 -o root -g root ${builddir}/JSON.sh ${pkgdir}/usr/bin/JSON.sh
@@ -46,4 +46,4 @@ package() {
 
 	return 0
 }
-sha512sums="6b98d0ae814ec7c7a11d2d30ed97e3ded034a61c52a9e8cb72f3323fc8876bc8092f1e2ed5e9b32fa348d378eecd0352eab38266f15f9902da7ee90e44273af1  fruit-agent-master.zip"
+sha512sums="7e2a129b7df41bf3a927eedd33261c42e770e72dee820341cdcfca8d9d4b2677f77c2098ddb1702b00afb8f614dba2c96b4430915b76466b01efbb324b3d64de  fruit-agent-0.0.8.zip"
