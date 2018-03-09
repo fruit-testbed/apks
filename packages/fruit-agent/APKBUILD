@@ -1,12 +1,12 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
-pkgver=0.0.10
+pkgver=0.0.11
 pkgrel=0
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
-depends="busybox openrc sipcalc"
+depends="busybox openrc sipcalc overlayfs-tools"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
@@ -46,4 +46,4 @@ package() {
 
 	return 0
 }
-sha512sums="95d7f79dafe1ffb293873cfcf7c192a8d44ef7e9324a66e3672536674309294445099f2aa96d925246fe84cb8e596caa44a6dff5e73812cf4eeaf97f88e60a16  fruit-agent-0.0.10.zip"
+sha512sums="21058dce50099c727b65507dcbc2fc01d873b977bf6e7f8b3e25972595ad7382b37543ac266be31ca3bb9b228c93d577bd98618be2a86e57e39605e586f9fb4a  fruit-agent-0.0.11.zip"
