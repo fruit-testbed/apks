@@ -1,0 +1,35 @@
+diff --git a/logic.c b/logic.c
+index 908c5b7..7a2a4d1 100644
+--- a/logic.c
++++ b/logic.c
+@@ -308,7 +308,7 @@ int merge_d(const char *lower_path, const char* upper_path, const size_t lower_r
+         }
+     }
+     *fts_instr = FTS_SKIP;
+-    return command(script_stream, "mv -T % %", upper_path, lower_path);
++    return command(script_stream, "mv -f % %", upper_path, lower_path);
+ }
+ 
+ int merge_dp(const char *lower_path, const char* upper_path, const size_t lower_root_len, const struct stat *lower_status, const struct stat *upper_status, bool verbose, FILE* script_stream, int *fts_instr) {
+@@ -325,7 +325,7 @@ int merge_dp(const char *lower_path, const char* upper_path, const size_t lower_
+ }
+ 
+ int merge_f_sl(const char *lower_path, const char* upper_path, const size_t lower_root_len, const struct stat *lower_status, const struct stat *upper_status, bool verbose, FILE* script_stream, int *fts_instr) {
+-    return command(script_stream, "rm -rf %", lower_path) || command(script_stream, "mv -T % %", upper_path, lower_path);
++    return command(script_stream, "rm -rf %", lower_path) || command(script_stream, "mv -f % %", upper_path, lower_path);
+ }
+ 
+ int merge_whiteout(const char *lower_path, const char* upper_path, const size_t lower_root_len, const struct stat *lower_status, const struct stat *upper_status, bool verbose, FILE* script_stream, int *fts_instr) {
+diff --git a/makefile b/makefile
+index 8a77ecd..823d83f 100644
+--- a/makefile
++++ b/makefile
+@@ -5,7 +5,7 @@ CC = gcc
+ all: overlay
+ 
+ overlay: main.o logic.o sh.o
+-	$(CC) $(LFLAGS) main.o logic.o sh.o -o overlay
++	$(CC) $(LFLAGS) main.o logic.o sh.o /usr/lib/libfts.a -o overlay
+ 
+ main.o: main.c logic.h
+ 	$(CC) $(CFLAGS) -c main.c
