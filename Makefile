@@ -26,6 +26,7 @@ PACKAGES = \
 	singularity.apk \
 	openvpn.apk \
 	apk-repositories.apk \
+	overlayfs-tools.apk \
 
 
 ifeq ($(TARGET),)
