@@ -50,8 +50,6 @@ overlay:
 		mount -t overlay -o lowerdir=/var/cache/distfiles,upperdir=.cache,workdir=.cache.workdir overlay /var/cache/distfiles
 	mkdir -p .usr .usr.workdir && \
 		mount -t overlay -o lowerdir=/usr,upperdir=.usr,workdir=.usr.workdir overlay /usr
-	mkdir -p .etc .etc.workdir && \
-		mount -t overlay -o lowerdir=/etc,upperdir=.etc,workdir=.etc.workdir overlay /etc
 
 clean.overlay:
 	[ "$$(mount | grep ' on /usr ')" = "" ] || umount -f /usr
