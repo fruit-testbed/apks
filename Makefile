@@ -27,6 +27,7 @@ PACKAGES = \
 	openvpn.apk \
 	apk-repositories.apk \
 	overlayfs-tools.apk \
+	docker.apk \
 
 
 ifeq ($(TARGET),)
