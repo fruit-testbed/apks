@@ -1,0 +1,14 @@
+# Sample conf.d file for alpine linux
+
+#
+# Specify daemon options here.
+#
+
+kubelet_opts="  --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf \
+                --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true \
+                --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/data/k8s/cni/bin \
+                --cluster-dns=10.96.0.10 --cluster-domain=cluster.local \
+                --authorization-mode=Webhook --client-ca-file=/etc/kubernetes/pki/ca.crt \
+                --cgroup-driver=cgroupfs \
+                --cadvisor-port=0 \
+                --rotate-certificates=true"
