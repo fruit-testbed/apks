@@ -1,5 +1,5 @@
 # Contributor:
-# Maintainer:
+# Maintainer: Wajdi Hajji <w.hajji@lboro.ac.uk>
 pkgname=k8s
 pkgver="v1.8.3"
 pkgrel=0
