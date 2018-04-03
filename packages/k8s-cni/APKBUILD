@@ -1,5 +1,5 @@
 # Contributor:
-# Maintainer:
+# Maintainer: Wajdi Hajji <w.hajji@lboro.ac.uk>
 pkgname=k8s-cni
 pkgver="v0.6.0"
 pkgrel=0
