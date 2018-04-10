@@ -28,6 +28,8 @@ PACKAGES = \
 	apk-repositories.apk \
 	overlayfs-tools.apk \
 	docker.apk \
+	k8s.apk \
+	k8s-cni.apk \
 
 
 ifeq ($(TARGET),)
