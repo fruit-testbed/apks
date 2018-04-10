@@ -3,7 +3,7 @@
 # Sample init.d file for alpine linux.
 
 name=kubelet
-command="/data/k8s/bin/$name"
+command="/usr/k8s/bin/$name"
 command_args="$kubelet_opts"
 command_background="yes"
 
