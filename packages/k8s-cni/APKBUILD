@@ -22,6 +22,7 @@ build() {
 package() {
         mkdir -p "$pkgdir"/usr/k8s/cni/bin
         tar -xzf "$srcdir"/cni-plugins-arm-"$pkgver".tgz -C "$pkgdir"/usr/k8s/cni/bin
+        chmod 0755 "$pkgdir"/usr/k8s/cni/bin/*
         return 0
 }
 sha512sums="69130acb83f2e9e58998a4735c8004cdc81201f3c4639e5ca77ba7ac83e243e40be10078ab0438a637e395d55f900ac3118bcf80fc00c04c5466b853adf27fae  cni-plugins-arm-v0.6.0.tgz"
