@@ -32,9 +32,9 @@ package() {
         install -m644 -D "$srcdir"/kubelet.confd \
                 "$pkgdir"/etc/conf.d/kubelet
 
-        mkdir -p "$pkgdir"/data/k8s/bin
-        cp "$srcdir"/kube* "$pkgdir"/data/k8s/bin
-        chmod +x "$pkgdir"/data/k8s/bin/kube*
+        mkdir -p "$pkgdir"/usr/k8s/bin
+        cp "$srcdir"/kube* "$pkgdir"/usr/k8s/bin
+        chmod +x "$pkgdir"/usr/k8s/bin/kube*
         return 0
 }
 sha512sums="4a441a62ec3a5d4c3865d6fb15c3f718247fb1beacea8edb3c698a4b57fe81060ee7032357b9be73a43a4becf8a8c6c246bf7ae57893aa8ff74b5883cc34eeae  kubeadm
