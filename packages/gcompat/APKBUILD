@@ -1,0 +1,32 @@
+#Contributor:
+# Maintainer: Wajdi Hajji <w.hajji@lboro.ac.uk>
+pkgname=gcompat
+pkgver=0.0.1
+pkgrel=0
+pkgdesc="glibc compatibility layer for musl"
+url="https://github.com/AdelieLinux/gcompat"
+arch="armhf"
+license="UIUC license"
+depends=""
+makedepends=""
+install=""
+subpackages=""
+gitcommit="1a59e495dbe68a6f5dc862f929ed38da056afbd4"
+source="${pkgname}-${gitcommit}.zip::https://github.com/AdelieLinux/gcompat/archive/${gitcommit}.zip"
+builddir="$srcdir/${pkgname}-${gitcommit}"
+options="!check"
+
+build() {
+        cd "$builddir"
+        make LINKER_PATH=/lib/ld-musl-armhf.so.1 LOADER_NAME=ld-linux-armhf.so.3  || return 1
+}
+
+package() {
+        cd "$builddir"
+	install -D -m755 libgcompat.so.0 \
+		"$pkgdir"/lib/libgcompat.so.0
+	install -D -m755 ld-linux-armhf.so.3 \
+		"$pkgdir"/lib/ld-linux-armhf.so.3
+	return 0
+}
+sha512sums="f0606a4df614b3c199898592a2df17b0b5bbda8f9d6876952a014f7effdf64e36dc847756764c163c836986a806e332e2c26d639b5ed163478984237b7686920  gcompat-1a59e495dbe68a6f5dc862f929ed38da056afbd4.zip"

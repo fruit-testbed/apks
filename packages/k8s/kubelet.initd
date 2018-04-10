@@ -1,0 +1,20 @@
+#!/sbin/openrc-run
+
+# Sample init.d file for alpine linux.
+
+name=kubelet
+command="/data/k8s/bin/$name"
+command_args="$kubelet_opts"
+command_background="yes"
+
+KUBELET_LOGFILE="${KUBELET_LOGFILE:-/var/log/$name.log}"
+KUBELET_ERRFILE="${KUBELET_ERRFILE:-${KUBELET_LOGFILE}}"
+KUBELET_OUTFILE="${KUBELET_OUTFILE:-${KUBELET_LOGFILE}}"
+
+start_stop_daemon_args="--stderr \"${KUBELET_ERRFILE}\" --stdout \"${KUBELET_OUTFILE}\""
+
+pidfile="/run/$name.pid"
+
+depend() {
+        need net
+}

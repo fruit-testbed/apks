@@ -1,0 +1,44 @@
+# Contributor:
+# Maintainer: Wajdi Hajji <w.hajji@lboro.ac.uk>
+pkgname=k8s
+pkgver="v1.8.3"
+pkgrel=0
+pkgdesc="Kubernetes kubeadm"
+url="https://kubernetes.io/"
+arch="armhf"
+license="Apache License 2.0"
+depends="ebtables ethtool socat"
+makedepends=""
+install=""
+subpackages=""
+source="
+        kubeadm::https://storage.googleapis.com/kubernetes-release/release/${pkgver}/bin/linux/arm/kubeadm
+        kubelet::https://storage.googleapis.com/kubernetes-release/release/${pkgver}/bin/linux/arm/kubelet
+        kubectl::https://storage.googleapis.com/kubernetes-release/release/${pkgver}/bin/linux/arm/kubectl
+        kubelet.initd
+        kubelet.confd
+        "
+builddir="$srcdir/"
+options="!check"
+
+build() {
+        return 0
+}
+
+package() {
+
+        install -m755 -D "$srcdir"/kubelet.initd \
+                "$pkgdir"/etc/init.d/kubelet
+        install -m644 -D "$srcdir"/kubelet.confd \
+                "$pkgdir"/etc/conf.d/kubelet
+
+        mkdir -p "$pkgdir"/usr/k8s/bin
+        cp "$srcdir"/kube* "$pkgdir"/usr/k8s/bin
+        chmod +x "$pkgdir"/usr/k8s/bin/kube*
+        return 0
+}
+sha512sums="4a441a62ec3a5d4c3865d6fb15c3f718247fb1beacea8edb3c698a4b57fe81060ee7032357b9be73a43a4becf8a8c6c246bf7ae57893aa8ff74b5883cc34eeae  kubeadm
+1347a9c61299d43cd8a2c04df23c5bd881f319f4995e54cb4514356795b0e10ac7501621087a9adad61ee0e170f74f2b9241f73b1bb6dde71421504349a2df5b  kubelet
+60983f126bfb51d381629a71ab46c365b2a8c7ddc9f6a13155206c16b2dfa15d2141e2b0bb29a0f600f70f9f9b7d2245e2ff4bdf34c7991e0590432918b7f31e  kubectl
+8425e93785e0c2b677fb66ddf3c1a8ef336af752cc17fed37ec2ab9055ff3ab1cd245ba37339841694fa49671c365d13b47b6b9d9ae6558a249418f7c4d46f3a  kubelet.initd
+eba716850b913912705d17770ef28156c6d1c03bd2895db98bd22495190ba860a57ab3b559d40fcf2e74c58a9430511000852f2d82fe2a80af7215fa253853d0  kubelet.confd"
