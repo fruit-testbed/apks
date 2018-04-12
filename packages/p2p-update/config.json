@@ -1,0 +1,15 @@
+{
+    "address": "",
+    "api": {
+        "address": "/var/run/p2pupdate.sock"
+    },
+    "bittorrent": {
+        "tracker": "https://fruit-testbed.org:443/announce"
+    },
+    "data-dir": "/var/lib/p2pupdate",
+    "log-file": "/var/log/p2pupdate.log",
+    "public-key": {
+        "filename": "/etc/apk/keys/fruit-apk-key-20170922.rsa.pub"
+    },
+    "server": "fruit-testbed.org:3478"
+}

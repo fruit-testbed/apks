@@ -30,6 +30,7 @@ PACKAGES = \
 	docker.apk \
 	k8s.apk \
 	k8s-cni.apk \
+	p2p-update.apk \
 
 
 ifeq ($(TARGET),)

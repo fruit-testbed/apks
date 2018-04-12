@@ -1,0 +1,49 @@
+# Contributor: "Herry <herry.herry@glasgow.ac.uk>"
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=p2p-update
+pkgver=0.0.1
+pkgrel=0
+pkgdesc="P2P Update"
+url="https://fruit-testbed.org"
+arch="armhf"
+license="Apache-2.0"
+depends="musl fruit-keys"
+depends_dev=""
+makedepends="$depends_dev go upx"
+install=""
+subpackages=""
+source="
+${pkgname}-${pkgver}.zip::https://github.com/fruit-testbed/${pkgname}/archive/v${pkgver}.zip
+config.json
+"
+options="suid !check"
+
+prepare() {
+	default_prepare
+	mkdir -p $srcdir/src/github.com/fruit-testbed
+	mv $srcdir/${pkgname}-${pkgver} $srcdir/src/github.com/fruit-testbed/${pkgname}
+	GOPATH=$srcdir go get -u github.com/golang/dep/cmd/dep
+	cd $srcdir/src/github.com/fruit-testbed/${pkgname}
+	GOPATH=$srcdir $srcdir/bin/dep ensure
+}
+
+build() {
+	cd $srcdir/src/github.com/fruit-testbed/${pkgname} \
+		&& GOPATH=$srcdir go build -ldflags="-s -w" -o ${pkgname} *.go \
+		&& upx ${pkgname} \
+
+	return $?
+}
+
+package() {
+	install -D -m755 -o root -g root \
+		$srcdir/src/github.com/fruit-testbed/${pkgname}/${pkgname} \
+		${pkgdir}/usr/sbin/${pkgname}
+
+	install -D -m644 -o root -g root \
+		$srcdir/config.json \
+		${pkgdir}/etc/p2p-update/config.json
+
+	return 0
+}
+sha512sums="fd21874adb5fc49cf4fa97430ce29453dfad6547258511e15a9a1f34698a840223386d6f0edb274e5e5df8dc74014399178768e02298e782829486137f8e2b9b  p2p-update-0.0.1.zip"
