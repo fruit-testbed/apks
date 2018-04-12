@@ -1,0 +1,31 @@
+# Contributor: "Herry <herry.herry@glasgow.ac.uk>"
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=p2pupdate
+pkgver=0.0.1
+pkgrel=0
+pkgdesc="P2P Update"
+url="https://fruit-testbed.org"
+arch="armhf"
+license="Apache-2.0"
+depends=""
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/p2p-update/zip/v${pkgver}"
+builddir="$srcdir/${pkgname}-${pkgver}"
+options="suid !check"
+
+prepare() {
+	default_prepare
+}
+
+build() {
+  cd ${builddir} && ./build
+	return 0
+}
+
+package() {
+  install -D -m755 -o root -g root ${builddir}/p2pupdate ${pkgdir}/usr/sbin/p2pupdate
+	return 0
+}
