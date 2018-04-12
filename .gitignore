@@ -9,6 +9,8 @@
 /.usr*
 /.var*
 /*.rsa
+/.distfiles
+/.fruitdev
 
 # VIM temporary file
 .*.swp

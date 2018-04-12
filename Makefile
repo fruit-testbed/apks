@@ -49,16 +49,18 @@ rsync: $(SOURCE_DIR)
 		$(RSYNC_SOURCE_DIR) "$(RSYNC_USER)@$(RSYNC_HOST):$(RSYNC_DEST_DIR)"
 
 overlay:
-	mkdir -p .cache .cache.workdir /var/cache/distfiles && \
-		mount -t overlay -o lowerdir=/var/cache/distfiles,upperdir=.cache,workdir=.cache.workdir overlay /var/cache/distfiles
+	mkdir -p .distfiles .distfiles.workdir /var/cache/distfiles && \
+		mount -t overlay -o lowerdir=/var/cache/distfiles,upperdir=.distfiles,workdir=.distfiles.workdir overlay /var/cache/distfiles
 	mkdir -p .usr .usr.workdir && \
 		mount -t overlay -o lowerdir=/usr,upperdir=.usr,workdir=.usr.workdir overlay /usr
+	mkdir -p .fruitdev .fruitdev.workdir /home/fruitdev && \
+		mount -t overlay -o lowerdir=/home/fruitdev,upperdir=.fruitdev,workdir=.fruitdev.workdir overlay /home/fruitdev
 
 clean.overlay:
 	[ "$$(mount | grep ' on /usr ')" = "" ] || umount -f /usr
-	[ "$$(mount | grep ' on /var ')" = "" ] || umount -f /var
-	[ "$$(mount | grep ' on /etc ')" = "" ] || umount -f /etc
-	rm -rf .cache .cache.workdir .usr .usr.workdir .etc .etc.workdir
+	[ "$$(mount | grep ' on /var/cache/distfiles ')" = "" ] || umount -f /var/cache/distfiles
+	[ "$$(mount | grep ' on /home/fruitdev ')" = "" ] || umount -f /home/fruitdev
+	rm -rf .distfiles .distfiles.workdir .usr .usr.workdir .fruitdev .fruitdev.workdir
 
 .prepare:
 	apk update && apk upgrade && apk add alpine-sdk rsync
