@@ -1,0 +1,5 @@
+# Path of config file
+CONFIG_FILE="/etc/p2p-update/config.json"
+
+# The default is running as agent
+OPTS="agent --config-file $CONFIG_FILE"

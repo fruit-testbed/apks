@@ -1,0 +1,11 @@
+#!/sbin/openrc-run
+
+name=p2p-update
+command="/usr/sbin/$name"
+command_args="$OPTS"
+command_background="yes"
+pidfile="/var/run/$name.pid"
+
+depend() {
+	need net
+}
