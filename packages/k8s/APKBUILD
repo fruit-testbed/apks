@@ -2,13 +2,13 @@
 # Maintainer: Wajdi Hajji <w.hajji@lboro.ac.uk>
 pkgname=k8s
 pkgver="v1.8.3"
-pkgrel=0
+pkgrel=1
 pkgdesc="Kubernetes kubeadm"
 url="https://kubernetes.io/"
 arch="armhf"
 license="Apache License 2.0"
 depends="ebtables ethtool socat libc6-compat"
-makedepends=""
+makedepends="upx"
 install=""
 subpackages=""
 source="
@@ -19,7 +19,7 @@ source="
         kubelet.confd
         "
 builddir="$srcdir/"
-options="!check"
+options="!strip !check"
 
 build() {
         return 0
@@ -35,6 +35,11 @@ package() {
         mkdir -p "$pkgdir"/usr/k8s/bin
         cp "$srcdir"/kube* "$pkgdir"/usr/k8s/bin
         chmod +x "$pkgdir"/usr/k8s/bin/kube*
+
+	upx "$pkgdir"/usr/k8s/bin/kubeadm
+	upx "$pkgdir"/usr/k8s/bin/kubelet
+	upx "$pkgdir"/usr/k8s/bin/kubectl
+
         return 0
 }
 sha512sums="4a441a62ec3a5d4c3865d6fb15c3f718247fb1beacea8edb3c698a4b57fe81060ee7032357b9be73a43a4becf8a8c6c246bf7ae57893aa8ff74b5883cc34eeae  kubeadm
