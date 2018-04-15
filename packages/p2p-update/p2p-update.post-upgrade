@@ -1,0 +1,9 @@
+#!/bin/sh
+
+FLAG=/var/run/.p2p-update.restart
+if [ -f $FLAG ]; then
+	rc-service p2p-update restart
+	rm -f $FLAG
+fi
+
+exit 0

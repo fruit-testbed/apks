@@ -1,16 +1,16 @@
 # Contributor: "Herry <herry.herry@glasgow.ac.uk>"
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=p2p-update
-pkgver=0.0.1
-pkgrel=2
+pkgver=0.1.0
+pkgrel=0
 pkgdesc="P2P Update"
 url="https://fruit-testbed.org"
 arch="armhf"
 license="Apache-2.0"
 depends="musl libstdc++ fruit-keys"
 depends_dev=""
-makedepends="$depends_dev go upx"
-install=""
+makedepends="$depends_dev go"
+install="$pkgname.pre-upgrade $pkgname.post-upgrade"
 subpackages=""
 source="
 ${pkgname}-${pkgver}.zip::https://github.com/fruit-testbed/${pkgname}/archive/v${pkgver}.zip
@@ -32,7 +32,6 @@ prepare() {
 build() {
 	cd $srcdir/src/github.com/fruit-testbed/${pkgname} \
 		&& GOPATH=$srcdir go build -ldflags="-s -w" -o ${pkgname} *.go \
-		&& upx ${pkgname}
 
 	return $?
 }
@@ -56,7 +55,7 @@ package() {
 
 	return 0
 }
-sha512sums="300a02ad6f649d0f02d8da5ffdb7bbe29c1ed7d937d68585c9336da0cd6bef89b8be4b0e5c50f87bdf852785705824fa6a3e12a15174f0be3dc14dc407ad4a6b  p2p-update-0.0.1.zip
-55e9118f67604e4b6df12bed433b925e76ef1ad88aa9bc62b04e0d84a53efffb92d8952f536e41b926da7158f5b7baf31824e9d747989f8c61125f3feb3381ad  config.json
+sha512sums="da6df796127556a1e2c424a65bd751321f23b5994505b670c6499214750a75919e776062f9435e8529e8817eb537dfe1062d63e54679eae72367537061c5e1a1  p2p-update-0.1.0.zip
+138bc200b316bf296a8c727537b8b194d66975f63376b00155c855772cb27da5bf0e0e6288d4c83ffcb6b9846b08532255349ca23ff95f899f5da64dcd98b408  config.json
 af22276b6fb37ee0c1a6c2f13ed2dfabe1ffcca79a4adbf8426ba567a561a08ed9b7f4f361a69743144a3529fc4863ed290f8084472e680866d6534dfda67371  p2p-update.confd
 0cce9cb0687d2b60c8babfecbc24cec7c333c968701e023ee016db875241450f3105a8dcaf789de447532c961b2ad19a50bb43d739e441fa50df7cdfffe69b1e  p2p-update.initd"

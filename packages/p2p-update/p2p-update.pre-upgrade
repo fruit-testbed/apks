@@ -1,0 +1,10 @@
+#!/bin/sh
+
+FLAG=/var/run/.p2p-update.restart
+rm -f $FLAG
+if [ -f /var/run/p2pupdate.sock ]; then
+	rc-service p2p-update stop
+	touch $FLAG
+fi
+
+exit 0
