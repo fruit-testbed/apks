@@ -1,8 +1,8 @@
 # Contributor: "Herry <herry.herry@glasgow.ac.uk>"
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=p2p-update
-pkgver=0.1.1
-pkgrel=2
+pkgver=0.1.6
+pkgrel=0
 pkgdesc="P2P Update"
 url="https://fruit-testbed.org"
 arch="armhf"
@@ -59,7 +59,7 @@ package() {
 
 	return 0
 }
-sha512sums="d8101e977b0c820c3a4aaa9fc82a00db35ce700cb3beede9dea37bcbafe763a466096700189a84f52d33e6a0c07a95e3ad968b10b3b61d4a65cb356b8bac387e  p2p-update-0.1.1.zip
+sha512sums="244b688a892f4554140f6ab1687a937d5cedac5912e6cb87165a591936184b6d2f2b92e06603f593264ac69286fa3fa93597b05d35d82d07f7072d36cfa4019d  p2p-update-0.1.6.zip
 138bc200b316bf296a8c727537b8b194d66975f63376b00155c855772cb27da5bf0e0e6288d4c83ffcb6b9846b08532255349ca23ff95f899f5da64dcd98b408  config.json
 af22276b6fb37ee0c1a6c2f13ed2dfabe1ffcca79a4adbf8426ba567a561a08ed9b7f4f361a69743144a3529fc4863ed290f8084472e680866d6534dfda67371  p2p-update.confd
 0cce9cb0687d2b60c8babfecbc24cec7c333c968701e023ee016db875241450f3105a8dcaf789de447532c961b2ad19a50bb43d739e441fa50df7cdfffe69b1e  p2p-update.initd"
