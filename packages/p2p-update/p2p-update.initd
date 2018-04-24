@@ -8,4 +8,5 @@ pidfile="/var/run/$name.pid"
 
 depend() {
 	need net
+	after fruit-default
 }
