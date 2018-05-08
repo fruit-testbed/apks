@@ -31,6 +31,7 @@ PACKAGES = \
 	k8s.apk \
 	k8s-cni.apk \
 	p2p-update.apk \
+	py-serial.apk \
 
 
 ifeq ($(TARGET),)
