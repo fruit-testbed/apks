@@ -1,0 +1,29 @@
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=py3-pistack
+_pkgname="PiStack-interface"
+pkgver=0.0.1
+pkgrel=0
+pkgdesc="PiStack"
+url="https://fruit-testbed.org/pistack"
+arch="noarch"
+license="CC-BY-SA-4.0"
+depends="python3 py3-serial"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/${_pkgname}/zip/${pkgver}"
+builddir="$srcdir/${_pkgname}-${pkgver}"
+options="suid !check"
+
+build() {
+	cd "$builddir"
+	python3 setup.py build || return 1
+}
+
+package() {
+	mkdir -p "$pkgdir"
+	cd "$builddir"
+	python3 setup.py install --prefix=/usr --root="$pkgdir"
+}
+sha512sums="c48489a20359b1b1f4f20629cd54b718ff1dc72549066b4873240872f62a81c819399d07dea5ab794cf7e3f106092629e3c4ff70162af42356891a4ef21019d5  py3-pistack-0.0.1.zip"
