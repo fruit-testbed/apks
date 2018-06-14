@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
-pkgver=0.0.28
+pkgver=0.0.33
 pkgrel=0
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
@@ -35,6 +35,7 @@ package() {
 	install -m750 -o root -g root ${builddir}/fruit-monitor.in ${pkgdir}/usr/sbin/fruit-monitor
 	install -m750 -o root -g root ${builddir}/fruit-update.in ${pkgdir}/usr/sbin/fruit-update
 	install -m750 -o root -g root ${builddir}/fruit-value.in ${pkgdir}/usr/sbin/fruit-value
+	install -m750 -o root -g root ${builddir}/fruit-container.in ${pkgdir}/usr/sbin/fruit-container
 
 	mkdir -p ${pkgdir}/usr/bin/
 	install -m755 -o root -g root ${builddir}/piserial.in ${pkgdir}/usr/bin/piserial
@@ -53,4 +54,4 @@ package() {
 
 	return 0
 }
-sha512sums="5442f313e8f2c480264f86c31e19f397220c90256c3aaf830911dcfd3c043030ec72ff979527da7f5ebb7b7f662fc55c8d0fb6fae9cc794e3ef1b743075617c8  fruit-agent-0.0.28.zip"
+sha512sums="5e4cffd989c23de97daa33542d06770076f048ddaa71a96a5990f61d004a1221b65885d01ac19e9846e73f80d835e611a25aa0e77eefcaf3c4b5cf4ebc9eb55f  fruit-agent-0.0.33.zip"
