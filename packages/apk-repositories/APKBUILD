@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry13@gmail.com>"
 pkgname=apk-repositories
-pkgver=20180315
+pkgver=20180607
 pkgrel=0
 pkgdesc="APK Repositories"
 url="https://github.com/fruit-testbed/fruitos"
@@ -27,4 +27,4 @@ package() {
 	mkdir -p ${pkgdir}/etc/apk
 	install -m640 -o root -g root ${srcdir}/repositories ${pkgdir}/etc/apk
 }
-sha512sums="236c827b0614f20c86ddb93ed187df4114dbcf23ab54072210f8efb4b407df351506ed1d9d1681bc95f7cc226c4610c309662237f9d25a272f45bc503d48677e  repositories"
+sha512sums="4d9b248270d7e7a34dfdd1703af8272199f6f78a78527c380b509ba723e5bcf167db8ff6fc45e7d20204b5a33602c8bfbc2467090e462cf84c9986edca875453  repositories"
