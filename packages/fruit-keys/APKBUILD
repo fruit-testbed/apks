@@ -1,6 +1,6 @@
 # Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname="fruit-keys"
-pkgver="0.0.4"
+pkgver="0.1.0"
 pkgrel="0"
 pkgdesc="Public keys for Fruit packages"
 url="https://fruit-testbed.org"
@@ -10,7 +10,8 @@ depends=""
 makedepends=""
 install=""
 subpackages=""
-source="fruit-apk-key-20170922.rsa.pub"
+source="fruit-apk-key-20170922.rsa.pub
+fruit-apk-key-20180528.rsa.pub"
 options="!check"
 
 build() {
@@ -24,4 +25,5 @@ package() {
 	done
 }
 
-sha512sums="5afa51980d231c17c9ee2612329d4ab5bcff86c138c691812ede85f68c1e05eb6171c8555bf8415070692a8a5a5c5ee700ba530d054ad8e995ffe08d479e8b76  fruit-apk-key-20170922.rsa.pub"
+sha512sums="5afa51980d231c17c9ee2612329d4ab5bcff86c138c691812ede85f68c1e05eb6171c8555bf8415070692a8a5a5c5ee700ba530d054ad8e995ffe08d479e8b76  fruit-apk-key-20170922.rsa.pub
+1275ab91f8eff3dddf96e08544fed5426b8f15763f1ab7a433035d3251375d4c0b3e81f088d696043c8e4af14f0e5b3b898d38a47ce5f1ebe27697005f826b0f  fruit-apk-key-20180528.rsa.pub"
