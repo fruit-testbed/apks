@@ -55,26 +55,25 @@ if [ "${PEER_DNS}" != "no" ]; then
 				cp /etc/resolv.conf /etc/resolv.conf-"${dev}".sv
 			fi
 			printf "${DNS}" > /etc/resolv.conf
-			grep '^nameserver ' /etc/resolv.conf-"${dev}".sv >> /etc/resolv.conf
 			chmod 644 /etc/resolv.conf
 		fi
 	fi
 fi
 
 # Below section is Gentoo specific
-# Quick summary - our init scripts are re-entrant and set the SVCNAME env var
+# Quick summary - our init scripts are re-entrant and set the RC_SVCNAME env var
 # as we could have >1 openvpn service
 
-if [ -n "${SVCNAME}" ]; then
+if [ -n "${RC_SVCNAME}" ]; then
 	# If we have a service specific script, run this now
-	if [ -x /etc/openvpn/"${SVCNAME}"-up.sh ] ; then
-		/etc/openvpn/"${SVCNAME}"-up.sh "$@"
+	if [ -x /etc/openvpn/"${RC_SVCNAME}"-up.sh ] ; then
+		/etc/openvpn/"${RC_SVCNAME}"-up.sh "$@"
 	fi
 
 	# Re-enter the init script to start any dependant services
-	if ! /etc/init.d/"${SVCNAME}" --quiet status ; then
+	if ! /etc/init.d/"${RC_SVCNAME}" --quiet status ; then
 		export IN_BACKGROUND=true
-		/etc/init.d/${SVCNAME} --quiet start
+		/etc/init.d/${RC_SVCNAME} --quiet start
 	fi
 fi
 
