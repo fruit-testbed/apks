@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
-pkgver=0.0.38
+pkgver=0.1.0
 pkgrel=0
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
@@ -11,7 +11,10 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/fruit-agent/zip/v${pkgver}"
+source="
+${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/fruit-agent/zip/v${pkgver}
+fruit.local
+"
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="suid !check"
 
@@ -52,6 +55,11 @@ package() {
 	mkdir -p ${pkgdir}/boot
 	cd ${pkgdir}/boot && ln -sf /media/mmcblk0p1/overlays overlays
 
+	# rc.local scripts
+	mkdir -p ${pkgdir}/etc/local.d/
+	install -m755 -o root -g root ${srcdir}/fruit.local ${pkgdir}/etc/local.d/
+
 	return 0
 }
-sha512sums="f6e8b875936d1eaafa45f8454d0cdf562bccd94583970d55ef27ffcd5e1b52cd02b2e1ee0744cd34949b1fa2c2f7c92af7a8c73d18d9a2264ab42a6d2e2bf29d  fruit-agent-0.0.38.zip"
+sha512sums="d7fd6b7a2cecef8d1567a135c738dabece5fa0b81a63489fbfd80cf72bfdaaa6778f721e506525cb9089a9634acdcc2a17a4bcd1b4ad592560e1929c6f16d849  fruit-agent-0.1.0.zip
+e4179592d69a43186a62a93e2affa35e7699f1ff5387a27b5a4a5ead687da48a75cce231b1259c0b790990f8041d95c2206288be7dfd7fd943821d7aba3c8ba6  fruit.local"

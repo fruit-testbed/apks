@@ -1,0 +1,6 @@
+#!/bin/sh
+
+timeout -t 60 fruit-config
+fruit-container &
+
+exit 0
