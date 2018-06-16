@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=overlayfs-tools
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=0
 pkgdesc="A program to vacuum, diff, and merge OverlayFS volumes"
 url="https://github.com/kmxz/overlayfs-tools"
@@ -11,7 +11,7 @@ depends_dev="linux-headers attr-dev fts-dev"
 makedepends="$depends_dev"
 install=""
 subpackages=""
-gitcommit="44930a53e244ffd5377663b251109fafb5f44c0a"
+gitcommit="0d44989f1ab7f2e0f565e58f9aff7a9cffb32cd7"
 source="${pkgname}-${gitcommit}.zip::https://github.com/kmxz/overlayfs-tools/archive/${gitcommit}.zip
 musl-fts.patch"
 builddir="$srcdir/${pkgname}-${gitcommit}"
@@ -32,5 +32,5 @@ package() {
 
 	return 0
 }
-sha512sums="cf5364cf2a8dd8ed26487b5417a1bb512a1eabe7833e3bf0d10556ebf0de313b8cd27b8bd0560d02bd1c77ce229c7e9367df7f8ae1a22e681e695f1814b63279  overlayfs-tools-44930a53e244ffd5377663b251109fafb5f44c0a.zip
+sha512sums="1e5be4161b613613ca3481dea79571e6b55874e072f7a2160358227601b322f7680b23a635c3ce2d9cba0eea5f9409ba9e4da8ef90721e9913c88588772b605c  overlayfs-tools-0d44989f1ab7f2e0f565e58f9aff7a9cffb32cd7.zip
 465fd6df41b559d163d74534997ed4508572f671323d5d3e4858059d405a551845d8bf83cafbb9217d237d7ff4178cb0d1909d3364da41b6e6310657eebcedda  musl-fts.patch"
