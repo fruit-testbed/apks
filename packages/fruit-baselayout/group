@@ -38,6 +38,8 @@ usb:x:85:
 vpopmail:x:89:
 users:x:100:games
 ntp:x:123:
+messagebus:x:151:messagebus
+avahi:x:152:avahi
 nofiles:x:200:
 smmsp:x:209:smmsp
 locate:x:245:
