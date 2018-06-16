@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-u-boot
-pkgver=2018.01
+pkgver=2018.05
 pkgrel=0
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
@@ -79,5 +79,5 @@ package() {
 		include usercfg.txt
 	EOL
 }
-sha512sums="c56babcc0f79d02727c49abb3b0bcbadc710069456d4373acb401bc4f896af54cc710a915cb4a1f899a3714ce6c7101e32150c6bfb25edb5bf59db820eb5d52b  u-boot-2018.01.zip
+sha512sums="11bf3313780c2424f32241b3056bb79aa5bf5c8698a783a5a58bcd7c5dbc74ea6a0c7c6a05e578e0a9da92fb9b1fdd258435296dbfb3d0c5417de34f5f00e471  u-boot-2018.05.zip
 367795c95532d3227917dd45bba62fa349f3bda368cf8173488e29d4faedefe00422efd83b60406ea2fc609d1c635674760c018dc4718c61f6815a98ab421293  boot.cmd"
