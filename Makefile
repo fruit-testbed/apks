@@ -8,6 +8,7 @@ ARCH = armhf
 SSH_KEY_FILE = $(shell echo $$HOME)/.ssh/id_rsa
 RSYNC_SOURCE_DIR = $(TARGET)/packages/$(ARCH)/
 RSYNC_DEST_DIR = fruitos/edge/main/$(ARCH)/
+RSYNC_TESTING_DIR = fruitos/edge/testing/$(ARCH)/
 RSYNC_USER = fruit
 RSYNC_HOST = fruit-testbed.org
 
@@ -50,6 +51,11 @@ rsync: $(SOURCE_DIR)
 	rsync -avz --delete --progress \
 		-e "ssh -i $(SSH_KEY_FILE) -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
 		$(RSYNC_SOURCE_DIR) "$(RSYNC_USER)@$(RSYNC_HOST):$(RSYNC_DEST_DIR)"
+
+rsync.testing: $(SOURCE_DIR)
+	rsync -avz --delete --progress \
+		-e "ssh -i $(SSH_KEY_FILE) -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+		$(RSYNC_SOURCE_DIR) "$(RSYNC_USER)@$(RSYNC_HOST):$(RSYNC_TESTING_DIR)"
 
 overlay:
 	mkdir -p .distfiles .distfiles.workdir /var/cache/distfiles && \
