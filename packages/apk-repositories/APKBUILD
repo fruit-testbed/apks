@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry13@gmail.com>"
 pkgname=apk-repositories
-pkgver=20180607
+pkgver=20180617
 pkgrel=0
 pkgdesc="APK Repositories"
 url="https://github.com/fruit-testbed/fruitos"
