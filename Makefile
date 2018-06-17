@@ -64,6 +64,9 @@ overlay:
 		mount -t overlay -o lowerdir=/usr,upperdir=.usr,workdir=.usr.workdir overlay /usr
 	mkdir -p .fruitdev .fruitdev.workdir /home/fruitdev && \
 		mount -t overlay -o lowerdir=/home/fruitdev,upperdir=.fruitdev,workdir=.fruitdev.workdir overlay /home/fruitdev
+	mkdir -p .tmp .tmp.workdir && \
+		mount -t overlay -o lowerdir=/tmp,upperdir=.tmp,workdir=.tmp.workdir overlay /tmp && \
+		chmod 1777 /tmp
 
 clean.overlay:
 	[ "$$(mount | grep ' on /usr ')" = "" ] || umount -f /usr
