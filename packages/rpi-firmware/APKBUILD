@@ -1,6 +1,6 @@
 # Maintainer: "fruit <info@fruit-testbed.org>"
 pkgname=rpi-firmware
-pkgver=20180110
+pkgver=20180615
 pkgrel=0
 pkgdesc="RaspberryPi Firmwares"
 url="https://github.com/RPi-Distro/firmware-nonfree"
@@ -27,4 +27,4 @@ package() {
 	mkdir -p ${pkgdir}/lib/firmware/brcm
 	cp -f ${srcdir}/lib/firmware/brcm/*brcmfmac43430* ${pkgdir}/lib/firmware/brcm
 }
-sha512sums="020eb89e594a16300f2ffe7d5ee27ae418a7a2241eeffccb77a343c4c882ac921dfbc7fdd27dcc938817dfe753fef575af55de0bef54b9a3c1f51f5bbe2fa7b0  rpi-firmware-20180110.tar.gz"
+sha512sums="827b644577d942e178842cb1da400dda4adc7ebfb92e0330385400707e0a79fe3b30049accfe4cd670aa07d2e09ce3c27dc0a510c1deaf84f08a67e3192e60b9  rpi-firmware-20180615.tar.gz"
