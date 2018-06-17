@@ -6,7 +6,7 @@ pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
-depends="busybox openrc sipcalc overlayfs-tools raspberrypi dtc p2p-update"
+depends="busybox openrc sipcalc overlayfs-tools raspberrypi dtc p2p-update python3"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
@@ -61,5 +61,5 @@ package() {
 
 	return 0
 }
-sha512sums="d7fd6b7a2cecef8d1567a135c738dabece5fa0b81a63489fbfd80cf72bfdaaa6778f721e506525cb9089a9634acdcc2a17a4bcd1b4ad592560e1929c6f16d849  fruit-agent-0.1.0.zip
+sha512sums="1e7b7542be7f81c840d1a88d755f2fd8414145bb048ef882b651d90c5ef0f78461a061f7d525b600b4bab5ea406c94d035e612c86d0d07a1d8d6fde6ac8511b4  fruit-agent-0.1.0.zip
 e4179592d69a43186a62a93e2affa35e7699f1ff5387a27b5a4a5ead687da48a75cce231b1259c0b790990f8041d95c2206288be7dfd7fd943821d7aba3c8ba6  fruit-local.start"
