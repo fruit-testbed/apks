@@ -1,6 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-u-boot
-pkgver=2018.05
+pkgver=2018.07
+pkgver_suffix="-rc1"
 pkgrel=0
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
@@ -8,13 +9,13 @@ arch="armhf"
 license="GPL-2.0+"
 depends=""
 depends_dev="uboot-tools"
-makedepends="$depends_dev gcc make dtc bc"
+makedepends="$depends_dev gcc make dtc bc bison flex"
 install=""
 subpackages=""
-source="u-boot-${pkgver}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}
+source="u-boot-${pkgver}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}${pkgver_suffix}
 boot.cmd"
 options="suid !check"
-builddir=$srcdir/u-boot-${pkgver}
+builddir=$srcdir/u-boot-${pkgver}${pkgver_suffix}
 
 prepare() {
 	default_prepare
@@ -79,5 +80,5 @@ package() {
 		include usercfg.txt
 	EOL
 }
-sha512sums="11bf3313780c2424f32241b3056bb79aa5bf5c8698a783a5a58bcd7c5dbc74ea6a0c7c6a05e578e0a9da92fb9b1fdd258435296dbfb3d0c5417de34f5f00e471  u-boot-2018.05.zip
+sha512sums="e40cbeae0f2697dcb452c8240d11d1e3830ccc0dac2b6ebf41c41e9ea4dc1af0c00afb8f0eba2f5d72ab0c92e13ba85ea2f8d33d8672fd8ef0191353df66e58d  u-boot-2018.07.zip
 367795c95532d3227917dd45bba62fa349f3bda368cf8173488e29d4faedefe00422efd83b60406ea2fc609d1c635674760c018dc4718c61f6815a98ab421293  boot.cmd"
