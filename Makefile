@@ -18,17 +18,14 @@ PACKAGES = \
 	fruit-rpi-linux.apk \
 	fruit-rpi2-linux.apk \
 	rpi-firmware.apk \
-	uboot-tools.apk \
 	fruit-initramfs.apk \
 	fruit-u-boot.apk \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
 	fruit-agent.apk \
 	singularity.apk \
-	openvpn.apk \
 	apk-repositories.apk \
 	overlayfs-tools.apk \
-	docker.apk \
 	k8s.apk \
 	k8s-cni.apk \
 	p2p-update.apk \
