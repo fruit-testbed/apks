@@ -1,12 +1,12 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
 pkgver=0.1.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
-depends="busybox openrc sipcalc overlayfs-tools raspberrypi dtc p2p-update python3"
+depends="busybox openrc sipcalc overlayfs-tools raspberrypi dtc python3"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
