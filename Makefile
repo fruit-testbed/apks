@@ -31,6 +31,7 @@ PACKAGES = \
 	p2p-update.apk \
 	py-serial.apk \
 	py3-pistack.apk \
+	fruit.apk \
 
 
 ifeq ($(TARGET),)

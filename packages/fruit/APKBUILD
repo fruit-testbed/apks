@@ -1,0 +1,49 @@
+# Maintainer: Herry <herry.herry@glasgow.ac.uk>
+pkgname=fruit
+pkgver=0.4.0
+pkgrel=0
+pkgdesc="Fruit virtual package"
+url="https://fruit-testbed.org"
+arch="all"
+license="GPL2"
+pkggroups="shadow"
+options="!fhs !check"
+builddir="$srcdir/build"
+depends="
+alpine-conf
+alpine-keys
+apk-repositories@fruit
+apk-tools
+avahi
+avahi-tools
+bind-tools
+btrfs-progs
+busybox
+busybox-initscripts
+busybox-suid
+curl
+dbus
+dnsmasq
+docker
+fruit-agent
+fruit-baselayout
+fruit-keys
+kbd-bkeymaps
+libc-utils
+openrc
+openssh
+openssh-server
+openvpn
+parted
+python3
+tlsdate
+tzdata
+wireless-tools
+wpa_supplicant
+"
+
+package() {
+	mkdir -p "$pkgdir/usr/local/bin"
+	cd "$pkgdir/usr/local/bin"
+	ln -sf /usr/bin/python3 python
+}
