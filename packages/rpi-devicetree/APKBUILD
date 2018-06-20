@@ -1,0 +1,23 @@
+# Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
+pkgname=rpi-devicetree
+alpinever=v3.8
+pkgver=4.14.50
+pkgrel=1
+pkgdesc="Raspberry Pi Zero and 1 device tree for Linux Kernel"
+url="https://github.com/raspberrypi/linux"
+arch="noarch"
+license="GPL2"
+source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/${alpinever}/main/armhf/linux-rpi-${pkgver}-r${pkgrel}.apk"
+builddir="$srcdir/${pkgname}-${pkgver}"
+options="!strip suid !check"
+
+prepare() {
+	default_prepare
+}
+
+package() {
+	mkdir -p "$pkgdir/media/mmcblk0p1/"
+	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi"/* \
+		"$pkgdir/media/mmcblk0p1/"
+}	
+sha512sums="889faf6ed4f05f77b1822ec3ab91016d6dd3b06d83a53b5c3228add59e4f57a81aabba892287f572a3951613e84c95fba888424ecb08a827853b658ab8aa9c06  rpi-devicetree-4.14.50.tar.gz"
