@@ -18,6 +18,7 @@ PACKAGES = \
 	fruit-rpi-linux.apk \
 	fruit-rpi2-linux.apk \
 	rpi-firmware.apk \
+	rpi-devicetree.apk \
 	fruit-initramfs.apk \
 	fruit-u-boot.apk \
 	fruit-keys.apk \
