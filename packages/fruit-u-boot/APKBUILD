@@ -2,7 +2,7 @@
 pkgname=fruit-u-boot
 pkgver=2018.07
 pkgver_suffix="-rc1"
-pkgrel=0
+pkgrel=1
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
 arch="armhf"
@@ -24,10 +24,16 @@ prepare() {
 build() {
 	cd "$builddir"
 
-	# build u-boot for rpi 0/1
+	# build u-boot for rpi Zero W
+	make rpi_0_w_defconfig \
+		&& make -j2 \
+		&& mv u-boot.bin u-boot-rpi0w.bin \
+		|| return 1
+
+	# build u-boot for rpi 1
 	make rpi_defconfig \
 		&& make -j2 \
-		&& mv u-boot.bin u-boot-rpi.bin \
+		&& mv u-boot.bin u-boot-rpi1.bin \
 		|| return 1
 
 	# build u-boot for rpi 2
@@ -58,7 +64,8 @@ package() {
 	mkdir -p ${target}
 
 	# install u-boot binaries
-	install -m750 -o root -g root ${builddir}/u-boot-rpi.bin ${target}/u-boot-rpi.bin
+	install -m750 -o root -g root ${builddir}/u-boot-rpi0w.bin ${target}/u-boot-rpi0w.bin
+	install -m750 -o root -g root ${builddir}/u-boot-rpi1.bin ${target}/u-boot-rpi1.bin
 	install -m750 -o root -g root ${builddir}/u-boot-rpi2.bin ${target}/u-boot-rpi2.bin
 	install -m750 -o root -g root ${builddir}/u-boot-rpi3.bin ${target}/u-boot-rpi3.bin
 
@@ -73,9 +80,9 @@ package() {
 		gpu_mem_256=64
 		enable_uart=1
 		[pi0]
-		kernel=u-boot-rpi.bin
+		kernel=u-boot-rpi0w.bin
 		[pi1]
-		kernel=u-boot-rpi.bin
+		kernel=u-boot-rpi1.bin
 		[pi2]
 		kernel=u-boot-rpi2.bin
 		[pi3]
