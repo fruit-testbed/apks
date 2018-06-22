@@ -1,9 +1,9 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-rpi-linux
 alpinever=v3.8
-pkgver=4.14.50
+pkgver=4.14.51
 rpilinuxversion=rpi-4.14.y
-pkgrel=1
+pkgrel=0
 pkgdesc="Linux Kernel for RaspberryPi 0/1"
 url="https://github.com/raspberrypi/linux"
 arch="armhf"
@@ -43,5 +43,5 @@ package() {
 	# Copy license
 	cp -f ${srcdir}/COPYING.linux ${pkgdir}/boot/
 }	
-sha512sums="889faf6ed4f05f77b1822ec3ab91016d6dd3b06d83a53b5c3228add59e4f57a81aabba892287f572a3951613e84c95fba888424ecb08a827853b658ab8aa9c06  fruit-rpi-linux-4.14.50.tar.gz
+sha512sums="8fc9258f7f2dd9f47d59341ba71e985d67722e146793ed14ed73e0c7d053c2a1dfca4a3a17bd0b897b04bd7eb075743e501f54afa94ba0bce8e7ed2ec944bdfd  fruit-rpi-linux-4.14.51.tar.gz
 fbb1e0f29741e900a81ccbe76102103365423d310e9987dfc5858174999911037a9ad48270a3d0b86f245e91868ed73813ca273584be43816f53517858f3aabd  COPYING.linux"
