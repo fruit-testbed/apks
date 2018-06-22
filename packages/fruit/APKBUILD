@@ -4,7 +4,7 @@ pkgver=0.4.0
 pkgrel=0
 pkgdesc="Fruit virtual package"
 url="https://fruit-testbed.org"
-arch="all"
+arch="noarch"
 license="GPL2"
 pkggroups="shadow"
 options="!fhs !check"
@@ -38,6 +38,7 @@ parted
 python3
 tlsdate
 tzdata
+uboot-tools
 wireless-tools
 wpa_supplicant
 "
