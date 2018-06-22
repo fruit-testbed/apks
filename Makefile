@@ -33,6 +33,7 @@ PACKAGES = \
 	py-serial.apk \
 	py3-pistack.apk \
 	fruit.apk \
+	uboot-tools.apk \
 
 
 ifeq ($(TARGET),)
