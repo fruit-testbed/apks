@@ -1,7 +1,7 @@
 # Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname=fruit-baselayout
 pkgver=0.4.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Fruit base dir structure and init scripts"
 url="https://fruit-testbed.org"
 arch="all"
@@ -73,6 +73,8 @@ package() {
 		home \
 		lib/firmware \
 		lib/mdev \
+		media/root-ro \
+		media/root-rw \
 		media/usb \
 		media/mmcblk0p1 \
 		media/data \
