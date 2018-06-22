@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
 pkgver=0.1.1
-pkgrel=0
+pkgrel=1
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
@@ -58,6 +58,10 @@ package() {
 	# rc.local scripts
 	mkdir -p ${pkgdir}/etc/local.d/
 	install -m755 -o root -g root ${srcdir}/fruit-local.start ${pkgdir}/etc/local.d/
+
+	# default fruit.json
+	mkdir -p ${pkgdir}/usr/share/fruit/
+	install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/usr/share/fruit/
 
 	return 0
 }
