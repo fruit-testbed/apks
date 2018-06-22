@@ -8,7 +8,7 @@ url="https://kubernetes.io/"
 arch="armhf"
 license="Apache License 2.0"
 depends="ebtables ethtool socat libc6-compat"
-makedepends="upx"
+makedepends=""
 install=""
 subpackages=""
 source="
@@ -35,10 +35,6 @@ package() {
         mkdir -p "$pkgdir"/usr/k8s/bin
         cp "$srcdir"/kube* "$pkgdir"/usr/k8s/bin
         chmod +x "$pkgdir"/usr/k8s/bin/kube*
-
-	upx "$pkgdir"/usr/k8s/bin/kubeadm
-	upx "$pkgdir"/usr/k8s/bin/kubelet
-	upx "$pkgdir"/usr/k8s/bin/kubectl
 
         return 0
 }
