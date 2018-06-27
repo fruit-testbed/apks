@@ -1,17 +1,20 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
-pkgver=0.0.38
+pkgver=0.1.2
 pkgrel=0
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
 license="BSD"
-depends="busybox openrc sipcalc overlayfs-tools raspberrypi dtc p2p-update"
+depends="busybox openrc sipcalc overlayfs-tools raspberrypi dtc python3"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/fruit-agent/zip/v${pkgver}"
+source="
+${pkgname}-${pkgver}.zip::https://codeload.github.com/fruit-testbed/fruit-agent/zip/v${pkgver}
+fruit-local.start
+"
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="suid !check"
 
@@ -52,6 +55,15 @@ package() {
 	mkdir -p ${pkgdir}/boot
 	cd ${pkgdir}/boot && ln -sf /media/mmcblk0p1/overlays overlays
 
+	# rc.local scripts
+	mkdir -p ${pkgdir}/etc/local.d/
+	install -m755 -o root -g root ${srcdir}/fruit-local.start ${pkgdir}/etc/local.d/
+
+	# default fruit.json
+	mkdir -p ${pkgdir}/usr/share/fruit/
+	install -m640 -o root -g root ${builddir}/fruit.json ${pkgdir}/usr/share/fruit/
+
 	return 0
 }
-sha512sums="f6e8b875936d1eaafa45f8454d0cdf562bccd94583970d55ef27ffcd5e1b52cd02b2e1ee0744cd34949b1fa2c2f7c92af7a8c73d18d9a2264ab42a6d2e2bf29d  fruit-agent-0.0.38.zip"
+sha512sums="d36db8cc241a6c96670b6e1bacd28491ec0e897fa76292b5bb1e3852bc335f1fe979bdcfaa13311951f48a080386d69ecb14efc43f9e84485cf5e3c27d979091  fruit-agent-0.1.2.zip
+4bf0a48f30b426f42618f32248f5c4c815db745b88d1c32e55a6fbc21b233a315aedd09f22606030b3c08c5ab14adaeb3e5526d45e551f55eb821abc99a06a27  fruit-local.start"
