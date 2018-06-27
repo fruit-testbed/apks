@@ -119,7 +119,7 @@ tgz:
 	cd $(TARGET)/ && tar cvzf fruit-apks.tar.gz packages
 
 
-clean:
+clean.packages:
 	@if [ $$(grep $(USER) /etc/passwd | wc -l) -ne 0 ] && [ -e /usr/bin/abuild ]; then \
 		for package in packages/*; do \
 			if [ -e $$package/APKBUILD ]; then \
@@ -128,6 +128,8 @@ clean:
 			fi; \
 		done; \
 	fi
+
+clean: clean.packages
 	@[ "$$(grep $(USER) /etc/passwd)" = "" ] || deluser $(USER)
 	@[ ! -e /etc/sudoers ] || sed -i 's/^$(USER).*$$//' /etc/sudoers
 	@[ "$$(mount | grep ' on /var/cache/distfiles ')" = "" ] || umount -f /var/cache/distfiles
