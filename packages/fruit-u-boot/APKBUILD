@@ -2,7 +2,7 @@
 pkgname=fruit-u-boot
 pkgver=2018.07
 pkgver_suffix="-rc1"
-pkgrel=1
+pkgrel=6
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
 arch="armhf"
