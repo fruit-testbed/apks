@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=rpi-devicetree
 alpinever=v3.8
-pkgver=4.14.51
+pkgver=4.14.52
 pkgrel=0
 pkgdesc="Raspberry Pi Zero and 1 device tree for Linux Kernel"
 url="https://github.com/raspberrypi/linux"
@@ -20,4 +20,4 @@ package() {
 	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi"/* \
 		"$pkgdir/media/mmcblk0p1/"
 }	
-sha512sums="8fc9258f7f2dd9f47d59341ba71e985d67722e146793ed14ed73e0c7d053c2a1dfca4a3a17bd0b897b04bd7eb075743e501f54afa94ba0bce8e7ed2ec944bdfd  rpi-devicetree-4.14.51.tar.gz"
+sha512sums="92cd95c8615dee9824b712ac7641c459f2704fe1fe4378359a53785f0746ad1b4cafbf161b5702db0ed0fd847b8e36f3c5b6d797923f543915e14e962b3ff93e  rpi-devicetree-4.14.52.tar.gz"

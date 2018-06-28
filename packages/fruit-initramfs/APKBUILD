@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-initramfs
-pkgver=4.14.51
+pkgver=4.14.52
 pkgrel=0
 pkgdesc="Linux Initramfs with U-Boot"
 url="http://fruit-testbed.org"
