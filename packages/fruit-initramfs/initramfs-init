@@ -233,6 +233,9 @@ cat /proc/mounts | while read DEV DIR TYPE OPTS ; do
 done
 sync
 
+[ "$(grep ttyAMA0 $sysroot/etc/securetty)" = "" ] && \
+	echo "ttyAMA0" >> "$sysroot/etc/securetty"
+
 # switch root
 exec /bin/busybox switch_root $sysroot $chart_init /sbin/init $KOPT_init_args
 
