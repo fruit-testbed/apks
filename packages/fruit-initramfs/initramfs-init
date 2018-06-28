@@ -65,16 +65,16 @@ configure_ip() {
 			echo "ERROR: DHCP requested but not present in initrd"
 			return 1
 		fi
-		ebegin "Obtaining IP via DHCP ($device)..."
+		echo "Obtaining IP via DHCP ($device)..."
 		ifconfig $device 0.0.0.0
 		udhcpc -i $device -f -q
-		eend $?
+		[ $? -ne 0 ] && echo "Obtaining IP via DHCP ($device) [FAILED]" || true
 	else
 		# manual configuration
 		[ -n "$client_ip" -a -n "$netmask" ] || return
-		ebegin "Setting IP ($device)..."
+		echo "Setting IP ($device)..."
 		ip_set "$device" "$client_ip" "$netmask" "$gw_ip"
-		eend $?
+		[ $? -ne 0 ] && echo "Setting IP ($device) [FAILED]" || true
 	fi
 	MAC_ADDRESS=$(cat /sys/class/net/$device/address)
 }
@@ -149,18 +149,16 @@ done
 # pick first keymap if found
 for map in /etc/keymap/*; do
 	if [ -f "$map" ]; then
-		ebegin "Setting keymap ${map##*/}"
+		echo "Setting keymap ${map##*/}"
 		zcat "$map" | loadkmap
-		eend
 		break
 	fi
 done
 
 # start bootcharting if wanted
 if [ "$KOPT_chart" = yes ]; then
-	ebegin "Starting bootchart logging"
+	echo "Starting bootchart logging"
 	/sbin/bootchartd start-initfs "$sysroot"
-	eend 0
 fi
 
 # dma can be problematic
