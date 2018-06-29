@@ -1,9 +1,9 @@
 .PHONY: build sign clean
 
 TARGET = $(shell pwd)/target
-KEYFILE = $(shell pwd)/fruit-apk-key-20170922.rsa
+KEYFILE = $(shell pwd)/fruit-key-20180629.rsa
 USER = fruitdev
-ARCH = armhf
+ARCH = aarch64
 
 SSH_KEY_FILE = $(shell echo $$HOME)/.ssh/id_rsa
 RSYNC_SOURCE_DIR = $(TARGET)/packages/$(ARCH)/
@@ -16,24 +16,18 @@ RSYNC_HOST = fruit-testbed.org
 PACKAGES = \
 	fruit-rpi-bootloader.apk \
 	fruit-rpi-linux.apk \
-	fruit-rpi2-linux.apk \
 	rpi-firmware.apk \
 	rpi-devicetree.apk \
 	fruit-initramfs.apk \
+	uboot-tools.apk \
 	fruit-u-boot.apk \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
-	fruit-agent.apk \
-	singularity.apk \
-	apk-repositories.apk \
 	overlayfs-tools.apk \
-	k8s.apk \
-	k8s-cni.apk \
-	p2p-update.apk \
+	fruit-agent.apk \
+	apk-repositories.apk \
 	py-serial.apk \
 	py3-pistack.apk \
-	fruit.apk \
-	uboot-tools.apk \
 
 
 ifeq ($(TARGET),)
@@ -45,7 +39,7 @@ ifeq ($(USER),root)
 endif
 
 
-build: sign
+build: $(PACKAGES) sign
 
 rsync: $(SOURCE_DIR)
 	rsync -avz --delete --progress \
@@ -110,7 +104,7 @@ $(TARGET): .prepare $(PACKAGES)
 %.checksum: .prepare
 	cd packages/$* && su $(USER) -c 'abuild checksum'
 
-sign: $(TARGET)
+sign:
 	rm -f $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
 	abuild-sign -q -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
