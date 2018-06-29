@@ -5,9 +5,9 @@ pkgver_suffix="-rc1"
 pkgrel=6
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
-arch="armhf"
+arch="aarch64"
 license="GPL-2.0+"
-depends=""
+depends="uboot-tools"
 depends_dev=""
 makedepends="$depends_dev gcc make dtc bc bison flex"
 install=""
@@ -24,33 +24,14 @@ prepare() {
 build() {
 	cd "$builddir"
 
-	# build u-boot for rpi Zero W
-	make rpi_0_w_defconfig \
-		&& make -j2 \
-		&& mv u-boot.bin u-boot-rpi0w.bin \
-		|| return 1
-
-	# build u-boot for rpi 1
-	make rpi_defconfig \
-		&& make -j2 \
-		&& mv u-boot.bin u-boot-rpi1.bin \
-		|| return 1
-
-	# build u-boot for rpi 2
-	make rpi_2_defconfig \
-		&& make -j2 \
-		&& mv u-boot.bin u-boot-rpi2.bin \
-		|| return 2
-
 	# build u-boot for rpi 3
-	make rpi_3_32b_defconfig \
+	make rpi_3_defconfig \
 		&& make -j2 \
-		&& mv u-boot.bin u-boot-rpi3.bin \
-		|| return 3
+		|| return 1
 
 	cd "$srcdir"
 	mkimage -C none -A arm -T script -d boot.cmd boot.scr \
-		|| return 4
+		|| return 2
 }
 
 package() {
@@ -59,10 +40,7 @@ package() {
 	mkdir -p ${target}
 
 	# install u-boot binaries
-	install -m750 -o root -g root ${builddir}/u-boot-rpi0w.bin ${target}/u-boot-rpi0w.bin
-	install -m750 -o root -g root ${builddir}/u-boot-rpi1.bin ${target}/u-boot-rpi1.bin
-	install -m750 -o root -g root ${builddir}/u-boot-rpi2.bin ${target}/u-boot-rpi2.bin
-	install -m750 -o root -g root ${builddir}/u-boot-rpi3.bin ${target}/u-boot-rpi3.bin
+	install -m750 -o root -g root ${builddir}/u-boot.bin ${target}/u-boot.bin
 
 	# install u-boot script
 	install -m640 -o root -g root ${srcdir}/boot.scr ${target}/boot.scr
@@ -71,18 +49,8 @@ package() {
 	cat > ${target}/config.txt <<-EOL
 		disable_splash=1
 		boot_delay=0
-		gpu_mem=256
-		gpu_mem_256=64
-		enable_uart=1
-		[pi0]
-		kernel=u-boot-rpi0w.bin
-		[pi1]
-		kernel=u-boot-rpi1.bin
-		[pi2]
-		kernel=u-boot-rpi2.bin
-		[pi3]
-		kernel=u-boot-rpi3.bin
-		[all]
+		arm_control=0x200
+		kernel=u-boot.bin
 		include usercfg.txt
 	EOL
 }
