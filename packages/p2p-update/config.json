@@ -1,9 +1,0 @@
-{
-	"data-dir": "/var/lib/p2pupdate",
-	"public-key": {
-		"filename": "/etc/apk/keys/fruit-apk-key-20170922.rsa.pub"
-	},
-	"overlay": {
-		"channel-lifespan": 60
-	}
-}
