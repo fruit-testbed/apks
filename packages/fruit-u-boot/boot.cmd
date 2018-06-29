@@ -64,7 +64,7 @@ echo "=== Booting the kernel ===";
 echo "set root_dev=${root_dev}";
 echo "set bootargs=${bootargs}";
 sleep 2;
-if bootz ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr};
+if booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr};
 then
 	true;
 else
