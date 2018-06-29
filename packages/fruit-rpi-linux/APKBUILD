@@ -4,16 +4,16 @@ alpinever=v3.8
 pkgver=4.14.52
 rpilinuxversion=rpi-4.14.y
 pkgrel=0
-pkgdesc="Linux Kernel for RaspberryPi 0/1"
+pkgdesc="Linux Kernel for RaspberryPi"
 url="https://github.com/raspberrypi/linux"
-arch="armhf"
+arch="aarch64"
 license="GPL2"
 depends=""
 depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/${alpinever}/main/armhf/linux-rpi-${pkgver}-r${pkgrel}.apk
+source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/${alpinever}/main/${arch}/linux-rpi-${pkgver}-r${pkgrel}.apk
 COPYING.linux::https://raw.githubusercontent.com/raspberrypi/linux/${rpilinuxversion}/COPYING
 "
 builddir="$srcdir/${pkgname}-${pkgver}"
@@ -43,5 +43,5 @@ package() {
 	# Copy license
 	cp -f ${srcdir}/COPYING.linux ${pkgdir}/boot/
 }	
-sha512sums="92cd95c8615dee9824b712ac7641c459f2704fe1fe4378359a53785f0746ad1b4cafbf161b5702db0ed0fd847b8e36f3c5b6d797923f543915e14e962b3ff93e  fruit-rpi-linux-4.14.52.tar.gz
+sha512sums="b8eb2407aa23abcfde684aec52455f357de8da8c7457dfa50ed26f71dd7e183c9d93ddc0ce5f63bd4dfbb73593f6eea8daaef6778190b79d4e1aeeee0b800838  fruit-rpi-linux-4.14.52.tar.gz
 fbb1e0f29741e900a81ccbe76102103365423d310e9987dfc5858174999911037a9ad48270a3d0b86f245e91868ed73813ca273584be43816f53517858f3aabd  COPYING.linux"
