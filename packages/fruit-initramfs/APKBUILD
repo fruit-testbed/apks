@@ -4,9 +4,9 @@ pkgver=4.14.52
 pkgrel=0
 pkgdesc="Linux Initramfs with U-Boot"
 url="http://fruit-testbed.org"
-arch="armhf"
+arch="noarch"
 license="BSD"
-depends="mkinitfs fruit-u-boot"
+depends="mkinitfs"
 depends_dev=""
 makedepends="$depends_dev"
 install="$pkgname.post-install $pkgname.post-upgrade"
@@ -27,4 +27,4 @@ package() {
 	mkdir -p ${pkgdir}/usr/share/fruit/
 	install -m640 -o root -g root ${srcdir}/initramfs-init ${pkgdir}/usr/share/fruit/
 }
-sha512sums="d526ababda56a0048e17df6e42ad1aac1bc99203363f47e28c661cc4ce1f2b6543780d6d77e2f3932998f50283ab9d0b8197ab6cd31be7d25218a15634267840  initramfs-init"
+sha512sums="6522a14c101fec64a34f558cb0857f7d17506dc6b78e46708eee6c0fa9d15139006fae36302df2d7b2e3cd8cb97437d40b39df64d607deb6ce1702fdcfd17614  initramfs-init"
