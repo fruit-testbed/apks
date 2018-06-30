@@ -28,4 +28,12 @@ package() {
 	mkdir -p ${pkgdir}/lib/firmware/brcm
 	cp -f ${srcdir}/lib/firmware/brcm/*brcmfmac43430* ${pkgdir}/lib/firmware/brcm
 }
-sha512sums="f39ea693f7e2c0ad5256a333e3e65aa8aa8da952ff11c10d298d761b4e59fb85f2345d6f6fd821727e9a6574001ad3bf824debc75bb590656827ca14dcbe78df  rpi-firmware-20180615.tar.gz"
+
+case $_arch in
+	aarch64)
+		sha512sums="85929d7ce8433903a4fcb7ebf94798feb4c9ded43c9a7e508b8d83640158addbd7648ad6097d9307562deb6e8d0d1920b7471e9d4aad0f5fd6f51b55d1d6ca67  rpi-firmware-20180615.tar.gz"
+		;;
+	armhf)
+		sha512sums="f39ea693f7e2c0ad5256a333e3e65aa8aa8da952ff11c10d298d761b4e59fb85f2345d6f6fd821727e9a6574001ad3bf824debc75bb590656827ca14dcbe78df  rpi-firmware-20180615.tar.gz"
+		;;
+esac
