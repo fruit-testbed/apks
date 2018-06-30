@@ -18,16 +18,20 @@ prepare() {
 
 package() {
 	mkdir -p "$pkgdir/media/mmcblk0p1/"
-	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi"/overlays \
-		"$pkgdir/media/mmcblk0p1/"
 
 	case $_arch in
 		armhf)
-			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/*.dtb" \
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi"/* \
 				"$pkgdir/media/mmcblk0p1/"
 			;;
 		aarch64)
-			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm*-rpi-3-b*.dtb" \
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi"/overlays \
+				"$pkgdir/media/mmcblk0p1/"
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm2710-rpi-3-b-plus.dtb" \
+				"$pkgdir/media/mmcblk0p1/"
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm2710-rpi-3-b.dtb" \
+				"$pkgdir/media/mmcblk0p1/"
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm2837-rpi-3-b.dtb" \
 				"$pkgdir/media/mmcblk0p1/"
 			;;
 	esac
