@@ -3,7 +3,7 @@
 TARGET = $(shell pwd)/target
 KEYFILE ?= $(shell pwd)/fruit-apk-key-20170922.rsa
 USER = fruitdev
-ARCH ?= $(shell uname -m)
+ARCH ?= $(shell apk --print-arch)
 
 SSH_KEY_FILE = $(shell echo $$HOME)/.ssh/id_rsa
 RSYNC_SOURCE_DIR = $(TARGET)/packages/$(ARCH)/
