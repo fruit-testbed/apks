@@ -6,8 +6,9 @@ pkgrel=0
 pkgdesc="Raspberry Pi Device Tree Files for Linux Kernel"
 url="https://github.com/raspberrypi/linux"
 arch="all"
+_arch=$(apk --print-arch)
 license="GPL2"
-source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/${alpinever}/main/${arch}/linux-rpi-${pkgver}-r${pkgrel}.apk"
+source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/${alpinever}/main/${_arch}/linux-rpi-${pkgver}-r${pkgrel}.apk"
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="!strip suid !check"
 
@@ -19,11 +20,16 @@ package() {
 	mkdir -p "$pkgdir/media/mmcblk0p1/"
 	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi"/overlays \
 		"$pkgdir/media/mmcblk0p1/"
-	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm2710-rpi-3-b-plus.dtb" \
-		"$pkgdir/media/mmcblk0p1/"
-	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm2710-rpi-3-b.dtb" \
-		"$pkgdir/media/mmcblk0p1/"
-	cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm2837-rpi-3-b.dtb" \
-		"$pkgdir/media/mmcblk0p1/"
+
+	case $_arch in
+		armhf)
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/*.dtb" \
+				"$pkgdir/media/mmcblk0p1/"
+			;;
+		aarch64)
+			cp -a "$srcdir/usr/lib/linux-${pkgver}-${pkgrel}-rpi/bcm*-rpi-3-b*.dtb" \
+				"$pkgdir/media/mmcblk0p1/"
+			;;
+	esac
 }	
-sha512sums="b8eb2407aa23abcfde684aec52455f357de8da8c7457dfa50ed26f71dd7e183c9d93ddc0ce5f63bd4dfbb73593f6eea8daaef6778190b79d4e1aeeee0b800838  rpi-devicetree-4.14.52.tar.gz"
+sha512sums="92cd95c8615dee9824b712ac7641c459f2704fe1fe4378359a53785f0746ad1b4cafbf161b5702db0ed0fd847b8e36f3c5b6d797923f543915e14e962b3ff93e  rpi-devicetree-4.14.52.tar.gz"
