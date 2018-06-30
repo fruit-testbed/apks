@@ -15,7 +15,7 @@ builddir="$srcdir/u-boot-${pkgver}${pkgver_suffix}"
 build() {
 	cd "$builddir"
 	make defconfig || return 1
-	make tools-all || return 1
+	make -j4 tools-all || return 1
 }
 
 package() {
