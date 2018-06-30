@@ -1,0 +1,5 @@
+disable_splash=1
+boot_delay=0
+arm_control=0x200
+kernel=u-boot.bin
+include usercfg.txt
