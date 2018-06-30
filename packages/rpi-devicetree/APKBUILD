@@ -35,5 +35,13 @@ package() {
 				"$pkgdir/media/mmcblk0p1/"
 			;;
 	esac
-}	
-sha512sums="92cd95c8615dee9824b712ac7641c459f2704fe1fe4378359a53785f0746ad1b4cafbf161b5702db0ed0fd847b8e36f3c5b6d797923f543915e14e962b3ff93e  rpi-devicetree-4.14.52.tar.gz"
+}
+
+case $_arch in
+	aarch64)
+		sha512sums="b8eb2407aa23abcfde684aec52455f357de8da8c7457dfa50ed26f71dd7e183c9d93ddc0ce5f63bd4dfbb73593f6eea8daaef6778190b79d4e1aeeee0b800838  rpi-devicetree-4.14.52.tar.gz"
+		;;
+	armhf)
+		sha512sums="92cd95c8615dee9824b712ac7641c459f2704fe1fe4378359a53785f0746ad1b4cafbf161b5702db0ed0fd847b8e36f3c5b6d797923f543915e14e962b3ff93e  rpi-devicetree-4.14.52.tar.gz"
+		;;
+esac
