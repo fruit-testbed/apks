@@ -1,15 +1,15 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-initramfs
 pkgver=4.14.52
-pkgrel=0
+pkgrel=1
 pkgdesc="Linux Initramfs with U-Boot"
 url="http://fruit-testbed.org"
 arch="all"
 license="BSD"
-depends="mkinitfs"
+depends="mkinitfs uboot-tools"
 depends_dev=""
 makedepends="$depends_dev"
-install="$pkgname.post-install $pkgname.post-upgrade"
+# install="$pkgname.post-install $pkgname.post-upgrade"
 subpackages=""
 source="initramfs-init"
 builddir="$srcdir/${pkgname}-${pkgver}"
