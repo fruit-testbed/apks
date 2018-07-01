@@ -2,7 +2,7 @@
 pkgname=fruit-u-boot
 pkgver=2018.07
 pkgver_suffix="-rc2"
-pkgrel=7
+pkgrel=8
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
 arch="all"
@@ -73,9 +73,14 @@ package() {
 	target=${pkgdir}/media/mmcblk0p1
 
 	mkdir -p ${target}
-	cp ${builddir}/u-boot*.bin ${target}/ \
-		&& chown root:root ${target}/u-boot*.bin \
-		&& chmod 0750 ${target}/u-boot*.bin
+	case $_arch in
+		armhf)
+			cp -a ${builddir}/u-boot-rpi*.bin ${target}/
+			;;
+		aarch64)
+			cp -a ${builddir}/u-boot.bin ${target}/
+			;;
+	esac
 
 	# install u-boot script
 	install -m640 -o root -g root ${srcdir}/boot.scr ${target}/boot.scr
