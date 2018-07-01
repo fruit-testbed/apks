@@ -3,11 +3,12 @@
 pkgname=uboot-tools
 pkgver=2018.07
 pkgver_suffix="-rc2"
-pkgrel=0
+pkgrel=1
 pkgdesc="U-Boot bootloader utility tools"
 url="http://www.denx.de/wiki/U-Boot/WebHome"
 arch="all"
 license="GPL"
+depends="fruit-u-boot"
 makedepends="openssl-dev linux-headers sdl-dev bison flex"
 source="u-boot-${pkgver}${pkgver_suffix}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}${pkgver_suffix}"
 builddir="$srcdir/u-boot-${pkgver}${pkgver_suffix}"
