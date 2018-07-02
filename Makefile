@@ -29,6 +29,10 @@ PACKAGES = \
 	py-serial.apk \
 	py3-pistack.apk \
 
+ifeq ($(ARCH),armhf)
+	PACKAGES := $(PACKAGES) \
+		fruit-rpi2-linux.apk
+endif
 
 ifeq ($(TARGET),)
 	TARGET = $(shell pwd)/target
