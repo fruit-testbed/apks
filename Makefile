@@ -14,13 +14,7 @@ RSYNC_HOST = fruit-testbed.org
 
 
 PACKAGES = \
-	fruit-rpi-bootloader.apk \
-	fruit-rpi-linux.apk \
-	rpi-firmware.apk \
-	rpi-devicetree.apk \
 	fruit-initramfs.apk \
-	uboot-tools.apk \
-	fruit-u-boot.apk \
 	fruit-keys.apk \
 	fruit-baselayout.apk \
 	overlayfs-tools.apk \
@@ -28,11 +22,7 @@ PACKAGES = \
 	apk-repositories.apk \
 	py-serial.apk \
 	py3-pistack.apk \
-
-ifeq ($(ARCH),armhf)
-	PACKAGES := $(PACKAGES) \
-		fruit-rpi2-linux.apk
-endif
+	fruit-rpi2-linux.apk
 
 ifeq ($(TARGET),)
 	TARGET = $(shell pwd)/target
