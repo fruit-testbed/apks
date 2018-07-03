@@ -1,7 +1,6 @@
 disable_splash=1
 boot_delay=0
-gpu_mem=256
-gpu_mem_256=64
+gpu_mem=32
 enable_uart=1
 [pi0]
 kernel=u-boot-rpi0w.bin
