@@ -4,9 +4,9 @@ gpu_mem=256
 gpu_mem_256=64
 enable_uart=1
 [pi0]
-kernel=u-boot-rpi.bin
+kernel=u-boot-rpi0w.bin
 [pi1]
-kernel=u-boot-rpi.bin
+kernel=u-boot-rpi1.bin
 [pi2]
 kernel=u-boot-rpi2.bin
 [pi3]
