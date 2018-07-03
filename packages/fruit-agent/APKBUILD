@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-agent
-pkgver=0.1.5
-pkgrel=2
+pkgver=0.1.6
+pkgrel=0
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
 arch="noarch"
@@ -65,5 +65,5 @@ package() {
 
 	return 0
 }
-sha512sums="0c7c34c559ee7f5772daa7628c6946e24578115422f0b67f8ffac231420f686f49a952dc23120f8e0c22ca49eefc62f105504cf1babb0b55d758cad9965bddba  fruit-agent-0.1.5.zip
+sha512sums="8fca93237f78197de2964e25e58f2c1170df55840db8dd5c2c9581796439db0921e155076d7d07801d0f2a0b56cc9261c5b85f276d23ca806e0a28b846625297  fruit-agent-0.1.6.zip
 4bf0a48f30b426f42618f32248f5c4c815db745b88d1c32e55a6fbc21b233a315aedd09f22606030b3c08c5ab14adaeb3e5526d45e551f55eb821abc99a06a27  fruit-local.start"
