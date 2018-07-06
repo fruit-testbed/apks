@@ -1,5 +1,4 @@
-# Contributor: Fabian Affolter <fabian@affolter-engineering.ch>
-# Maintainer: Fabian Affolter <fabian@affolter-engineering.ch>
+# Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname=py-serial
 _pkgname=pyserial
 pkgver=3.4

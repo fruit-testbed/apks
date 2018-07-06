@@ -1,5 +1,4 @@
-# Contributor: Carlo Landmeter <clandmeter@gmail.com>
-# Maintainer:
+# Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname=uboot-tools
 pkgver=2018.07
 pkgver_suffix="-rc2"
