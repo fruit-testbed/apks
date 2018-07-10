@@ -1,7 +1,7 @@
 # Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname=fruit-baselayout
-pkgver=0.4.0
-pkgrel=1
+pkgver=0.4.1
+pkgrel=0
 pkgdesc="Fruit base dir structure and init scripts"
 url="https://fruit-testbed.org"
 arch="all"
@@ -112,6 +112,7 @@ package() {
 
 	install -m600 "$srcdir"/crontab "$pkgdir"/etc/crontabs/root
 	install -m644 "$srcdir"/color_prompt "$pkgdir"/etc/profile.d/
+	install -m644 "$srcdir"/opt_vc_bin "$pkgdir"/etc/profile.d/
 	install -m644 \
 		"$srcdir"/aliases.conf \
 		"$srcdir"/blacklist.conf \
@@ -196,7 +197,8 @@ bfe947bdd69e7d93b32c8cb4e2cabe5717cb6c1e1f49a74015ac2cfb13e96d1f12c4be23ae93a1d6
 b407351a5a64b00100753a13a91f4b1cb51017ae918a91fd37f3a6e76e3b6f562be643e74f969a888bdd54b0ad2d09e3b283d44ae4b5efccca7d7e9f735c5afb  kms.conf
 c792b09197ddb274996ec4c91f57ddc27f1f2600bfcb96778db0ccda09724477d854135fb2ddb8f26e54d450577b971fdc91baafa2d4174868bdc099b75d3e83  group
 f8fb22784d276df5d43f9814ab49152c8c7a07af3e61e42c425a725cf61f742ad029802f731440e702d26bf1986527921e3a56bdc28ce79e0470bd4c9673323d  inittab
+634ea58db44100f03e491de02a8457a666cc8a2ea7e3a2a2f0acfc838d06deb61e52d50e5726999054bd38d07cf083a24c0273ba852ca701cc643f993698cad5  opt_vc_bin
 0b9d0786638a56a81db9abe527a7a07e6ebefd1ffe5d124bd7b658ac18d9393da048a25f08f976f4bc89f629862bfbb5261087ed3e0e93d3697d2c1969e4a08d  passwd
-c4088a7148c0f161809852d248d2c2272d9c72be3f968c2e2ba40806f508238496eda0f8f2a42aa092773a56800b1dae9f843a42d93f1bb16ba5f58c111d531b  profile
+cbe67d9a2f9b472e51addd7e7b78ee736ed8cf600d157b5df6f6257fe1663aa24f702cec62b20ef92cdcd4d37aed6ff23f30e4001e3c12232581ad848d89ab0d  profile
 f1548a2b5a107479446f15905f0f2fbf8762815b2215188d49d905c803786d35de6d98005dc0828fb2486b04aaa356f1216a964befddf1e72cb169656e23b6ac  protocols
 cecfc06b1f455d65b0c54a5651e601298b455771333e39d0109eeffd7ebd8d81b7738738eb647e6d3076230b6f3707782b83662ea3764ec33dc5e0b3453d3965  services"

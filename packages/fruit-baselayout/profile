@@ -4,7 +4,7 @@ export PAGER=less
 export PS1='\h:\w\$ '
 umask 022
 
-for script in /etc/profile.d/*.sh ; do
+for script in /etc/profile.d/* ; do
         if [ -r $script ] ; then
                 . $script
         fi
