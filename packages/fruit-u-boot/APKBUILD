@@ -1,8 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-u-boot
 pkgver=2018.07
-pkgver_suffix="-rc2"
-pkgrel=10
+pkgrel=11
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
 arch="all"
@@ -13,14 +12,14 @@ depends_dev=""
 makedepends="$depends_dev gcc make dtc bc bison flex uboot-tools"
 install=""
 subpackages=""
-source="u-boot-${pkgver}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}${pkgver_suffix}
+source="u-boot-${pkgver}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}
 boot.cmd.armhf
 boot.cmd.aarch64
 config.txt.armhf
 config.txt.aarch64
 "
 options="suid !check"
-builddir=$srcdir/u-boot-${pkgver}${pkgver_suffix}
+builddir=$srcdir/u-boot-${pkgver}
 
 prepare() {
 	default_prepare
@@ -88,7 +87,7 @@ package() {
 	# install config.txt
 	install -m640 -o root -g root ${srcdir}/config.txt.${_arch} ${target}/config.txt
 }
-sha512sums="76aaa7e3cf149a5cae77f662011ba73e27edfdef57170ff1aab89305ea0a2b5782c372b64725328583be9418b7babd864ba8c62dac839dc4e3c97f00c3726a14  u-boot-2018.07.zip
+sha512sums="dd8264656819bef1b0cc9648bd34da98513433953fb14985ea70dbf8ccc827645253fc20e331a500322841526f04a2d69c2be63838e6d8ab264e709ad53f87e6  u-boot-2018.07.zip
 367795c95532d3227917dd45bba62fa349f3bda368cf8173488e29d4faedefe00422efd83b60406ea2fc609d1c635674760c018dc4718c61f6815a98ab421293  boot.cmd.armhf
 9d74a54487a4343123f1f8886c152469a0b666b48442e6dfcd94bcdae3fc5f7b85bcd57a004a4dcde280150c6d85ea19a83c8cd6568f76cc911d1fb866158950  boot.cmd.aarch64
 9c8b11782dfaa6f2421b5edbb1954778a6593730aaa024e8b1ec8778c9bfc0e76262bc6daa59f3f0afc3b5eaa2688947ee1aa212d46a7479ee966e581278b72a  config.txt.armhf
