@@ -37,7 +37,7 @@ echo "=== Check dirty flag: ${dirty_flag} ===";
 if fatload mmc 0:1 ${env_addr_r} ${dirty_flag};
 then
 	echo "=== ERROR: Root partition ${root_dev} is dirty ===";
-	if flatload mmc 0:1 ${env_addr_r} ${next_dirty_flag};
+	if fatload mmc 0:1 ${env_addr_r} ${next_dirty_flag};
 	then
 		echo "=== WARNING: Next root partition ${next_root_dev} is dirty as well ===";
 	else
