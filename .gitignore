@@ -3,6 +3,7 @@
 /packages/*/src
 /packages/*/pkg
 /fruit-apk-key.rsa
+/fruit-apk-key.rsa.pub
 /.cache
 /.cache.workdir
 /.etc*
