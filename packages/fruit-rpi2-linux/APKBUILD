@@ -1,6 +1,6 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-rpi2-linux
-alpinever=3.8
+alpinever=v3.8
 pkgver=4.14.52
 rpilinuxversion=rpi-4.14.y
 pkgrel=0
@@ -13,8 +13,8 @@ depends_dev=""
 makedepends="$depends_dev"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/v${alpinever}/main/armhf/linux-rpi2-${pkgver}-r${pkgrel}.apk
-COPYING.linux::https://raw.githubusercontent.com/raspberrypi/firmware/${rpiversion}/boot/COPYING.linux
+source="${pkgname}-${pkgver}.tar.gz::http://dl-4.alpinelinux.org/alpine/${alpinever}/main/armhf/linux-rpi2-${pkgver}-r${pkgrel}.apk
+COPYING.linux::https://raw.githubusercontent.com/raspberrypi/linux/${rpilinuxversion}/COPYING
 "
 builddir="$srcdir/${pkgname}-${pkgver}"
 options="!strip suid !check"
