@@ -74,7 +74,7 @@ clean.overlay:
 
 .prepare:
 	apk update && apk upgrade && apk add alpine-sdk rsync
-	adduser -D $(USER) && \
+	adduser -s /bin/sh -D $(USER) && \
 		echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers && \
 		addgroup $(USER) abuild && \
 		chown $(USER):$(USER) . && \
