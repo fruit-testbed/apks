@@ -80,6 +80,7 @@ clean.overlay:
 #  - shadow for `sg`
 .prepare:
 	apk update && apk upgrade && apk add alpine-sdk rsync shadow
+	[ -f /etc/apk/keys/fruit-apk-key.rsa.pub ] || cp $(KEYFILE).pub /etc/apk/keys/fruit-apk-key.rsa.pub
 	adduser -s /bin/sh -D $(USER) && \
 		echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers && \
 		addgroup $(USER) abuild && \
