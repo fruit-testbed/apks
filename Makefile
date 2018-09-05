@@ -1,7 +1,7 @@
 .PHONY: build sign clean
 
 TARGET = $(shell pwd)/target
-KEYFILE ?= $(shell pwd)/fruit-apk-key-20170922.rsa
+KEYFILE ?= $(shell pwd)/fruit-apk-key.rsa
 USER = fruitdev
 ARCH ?= $(shell apk --print-arch)
 
