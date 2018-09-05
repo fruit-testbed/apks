@@ -12,6 +12,8 @@ RSYNC_TESTING_DIR = fruitos/edge/testing/$(ARCH)/
 RSYNC_USER = fruit
 RSYNC_HOST = fruit-testbed.org
 
+SU_CMD = su $(USER)
+SU_CMD_PATH_OVERRIDE = PATH=/usr/sbin:/sbin:$$PATH
 
 PACKAGES = \
 	fruit-rpi-bootloader.apk \
@@ -72,8 +74,12 @@ clean.overlay:
 	[ "$$(mount | grep ' on /home/fruitdev ')" = "" ] || umount -f /home/fruitdev
 	rm -rf .distfiles .distfiles.workdir .usr .usr.workdir .fruitdev .fruitdev.workdir
 
+# Packages added:
+#  - alpine-sdk for build support
+#  - rsync for uploading finished packages
+#  - shadow for `sg`
 .prepare:
-	apk update && apk upgrade && apk add alpine-sdk rsync
+	apk update && apk upgrade && apk add alpine-sdk rsync shadow
 	adduser -s /bin/sh -D $(USER) && \
 		echo "$(USER)  ALL=(ALL) ALL" >> /etc/sudoers && \
 		addgroup $(USER) abuild && \
@@ -89,29 +95,25 @@ clean.overlay:
 	addgroup $(shell id -un) abuild
 	mkdir -p /var/cache/distfiles && chmod a+w /var/cache/distfiles
 	touch .prepare
-	@if [ "$$(id | grep '(abuild)')" = "" ]; then \
-		echo "$$(id -un) is not belong to group abuild. Please logout and login again!"; \
-		exit 1; \
-	fi
 
 $(TARGET): .prepare $(PACKAGES)
 
 %.apk: .prepare
 	@if [ -e packages/$*/APKBUILD ]; then \
 		echo "Building $*..."; \
-		cd packages/$* && abuild -F -P $(TARGET) deps && su $(USER) -c "abuild -P $(TARGET)"; \
+		cd packages/$* && sg abuild "abuild -F -P $(TARGET) deps" && $(SU_CMD) -c "$(SU_CMD_PATH_OVERRIDE) abuild -P $(TARGET)"; \
 	else \
 		echo "Fetching $*..."; \
 		apk fetch -o $(TARGET)/packages/$(ARCH) -R $*; \
 	fi
 
 %.checksum: .prepare
-	cd packages/$* && su $(USER) -c 'abuild checksum'
+	cd packages/$* && $(SU_CMD) -c "$(SU_CMD_PATH_OVERRIDE) abuild checksum"
 
 sign:
 	rm -f $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
 	cd $(TARGET)/packages/$(ARCH) && apk index -o APKINDEX.tar.gz --rewrite-arch $(ARCH) *.apk
-	abuild-sign -q -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz
+	sg abuild "abuild-sign -q -k $(KEYFILE) $(TARGET)/packages/$(ARCH)/APKINDEX.tar.gz"
 
 tgz:
 	cd $(TARGET)/ && tar cvzf fruit-apks.tar.gz packages
@@ -122,7 +124,7 @@ clean.packages:
 		for package in packages/*; do \
 			if [ -e $$package/APKBUILD ]; then \
 				echo "Cleaning $$package..."; \
-				su $(USER) -c "cd $$package && abuild clean"; \
+				$(SU_CMD) -c "cd $$package && $(SU_CMD_PATH_OVERRIDE) abuild clean"; \
 			fi; \
 		done; \
 	fi
@@ -142,7 +144,7 @@ cleancache:
 		for package in packages/*; do \
 			if [ -e $$package/APKBUILD ]; then \
 				echo "Cleaning cache of $$package..."; \
-				cd $$package && abuild -F cleancache; \
+				cd $$package && sg abuild "abuild -F cleancache"; \
 			fi; \
 		done; \
 	fi
@@ -151,7 +153,7 @@ cleancache:
 clean.%:
 	@if [ -e packages/$* ]; then \
 		echo "Cleaning $*..."; \
-		cd packages/$* && abuild -F clean && abuild -F cleancache; \
+		cd packages/$* && sg abuild "abuild -F clean" && sg abuild "abuild -F cleancache"; \
 	else \
 		echo "Package $* does not exist"; \
 	fi
