@@ -14,7 +14,7 @@ depends=""
 install="$pkgname.post-install"
 options="!check"
 source="abuild-$pkgver.tar.gz::https://github.com/alpinelinux/abuild/archive/v$pkgver.tar.gz write-check-count.patch"
-makedepends="libressl-dev"
+makedepends="openssl-dev"
 builddir="$srcdir/abuild-$pkgver"
 build() {
 	make VERSION="$pkgver-r$pkgrel" abuild-tar
