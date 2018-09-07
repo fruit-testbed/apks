@@ -95,6 +95,13 @@ clean.overlay:
 		chown -R $(USER):$(USER) $(TARGET)
 	addgroup $(shell id -un) abuild
 	mkdir -p /var/cache/distfiles && chmod a+w /var/cache/distfiles
+	if [ "$(ARCH)" = aarch64 ]; then \
+		cd packages/abuild-aarch64-qemu-workaround && \
+		sg abuild "abuild -F -P $(TARGET) deps" && \
+		$(SU_CMD) -c "$(SU_CMD_PATH_OVERRIDE) abuild -P $(TARGET)" && \
+		cd ../.. && \
+		apk --repository `pwd`/target/packages add abuild-aarch64-qemu-workaround; \
+	fi
 	touch .prepare
 
 $(TARGET): .prepare $(PACKAGES)

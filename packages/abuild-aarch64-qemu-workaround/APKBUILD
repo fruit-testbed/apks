@@ -1,0 +1,27 @@
+# Workaround for qemu bug https://bugs.launchpad.net/qemu/+bug/1716292
+# which causes abuild-tar bug https://github.com/postmarketOS/pmbootstrap/issues/546
+# which causes corruption of packages containing symlinks built on
+# aarch64 within qemu linux-user-mode emulation.
+# Based on https://github.com/postmarketOS/pmbootstrap/commit/4c7793e766d0a94fc6d7bccaec846840e8e99e36
+pkgname=abuild-aarch64-qemu-workaround
+pkgver=3.2.0
+pkgrel=0
+pkgdesc="Patched abuild-tar that works with Qemu"
+url="https://github.com/postmarketOS/pmbootstrap/issues/546"
+arch="aarch64"
+license="GPL2"
+depends=""
+install="$pkgname.post-install"
+options="!check"
+source="abuild-$pkgver.tar.gz::https://github.com/alpinelinux/abuild/archive/v$pkgver.tar.gz write-check-count.patch"
+makedepends="libressl-dev"
+builddir="$srcdir/abuild-$pkgver"
+build() {
+	make VERSION="$pkgver-r$pkgrel" abuild-tar
+}
+package() {
+	cd "$builddir"
+	install -Dm755 abuild-tar "$pkgdir"/usr/bin/abuild-tar-patched
+}
+sha512sums="b10bb84e80e6c321b1cda63a3d6c6682fae13fba89d8ab16a280dd57b8a453cc42f5a3555c2dfc35e4cddbacba464ccc79804fa37da1a34f45beaa362ef78098  abuild-3.2.0.tar.gz
+a80c55fe6cb6cc410ca409558c1e1ab8edec9a675031c404cec84c19b4b8460fbbba92db5c1401c0027f8fc0f5be4b82177ec2fad9d734cbc50ca24bfe6e149f  write-check-count.patch"
