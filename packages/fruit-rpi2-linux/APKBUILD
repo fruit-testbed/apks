@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-rpi2-linux
 alpinever=v3.8
-pkgver=4.14.52
+pkgver=4.14.69
 rpilinuxversion=rpi-4.14.y
 pkgrel=0
 pkgdesc="Linux Kernel for RaspberryPi 2/3"
@@ -42,6 +42,6 @@ package() {
 
 	# Copy license
 	cp -f ${srcdir}/COPYING.linux ${pkgdir}/boot/
-}	
-sha512sums="598cca168a6183fd420a45f84953b497800fb1991afd22cfed0dbd232e09fdb4f7885a13a56a6d463584e6ab69b243aafa3ea51bbd2c94fb8714590bcbc807d7  fruit-rpi2-linux-4.14.52.tar.gz
+}
+sha512sums="a8c12f8e07938bd502c059c2c1002df07ef7052f2cb26853c11445e44987d6308b1017ce023b92698aeefa8be3ea5c935563157ac5bbf628f4a2e96afc3eaa45  fruit-rpi2-linux-4.14.69.tar.gz
 fbb1e0f29741e900a81ccbe76102103365423d310e9987dfc5858174999911037a9ad48270a3d0b86f245e91868ed73813ca273584be43816f53517858f3aabd  COPYING.linux"

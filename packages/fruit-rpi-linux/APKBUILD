@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-rpi-linux
 alpinever=v3.8
-pkgver=4.14.52
+pkgver=4.14.69
 rpilinuxversion=rpi-4.14.y
 pkgrel=0
 pkgdesc="Linux Kernel for RaspberryPi"
@@ -47,10 +47,10 @@ package() {
 
 case $_arch in
 	aarch64)
-		sha512sums="b8eb2407aa23abcfde684aec52455f357de8da8c7457dfa50ed26f71dd7e183c9d93ddc0ce5f63bd4dfbb73593f6eea8daaef6778190b79d4e1aeeee0b800838  fruit-rpi-linux-4.14.52.tar.gz"
+		sha512sums="21a8f5d9e70d329e293a30f8613a63264b96b7dfb81c7a13f07f4f2f8fd8b5ce3eadec210f28922cbf7738875d32d1f67ca6a25c189c5d7cde1b3ad0a5a649cf  fruit-rpi-linux-4.14.69.tar.gz"
 		;;
 	armhf)
-		sha512sums="92cd95c8615dee9824b712ac7641c459f2704fe1fe4378359a53785f0746ad1b4cafbf161b5702db0ed0fd847b8e36f3c5b6d797923f543915e14e962b3ff93e  fruit-rpi-linux-4.14.52.tar.gz"
+		sha512sums="795eb62dd4f4d4ad4b0eab6c91a2065bbb50041db4fbb434716c3027e8963dddc0ab5f1ded9e663bfab4683be097d12d9d0b4750826cdf45ade8b9c769e51076  fruit-rpi-linux-4.14.69.tar.gz"
 		;;
 esac
 sha512sums="$sha512sums
