@@ -1,16 +1,15 @@
 # Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname=uboot-tools
 pkgver=2018.07
-pkgver_suffix="-rc2"
-pkgrel=1
+pkgrel=2
 pkgdesc="U-Boot bootloader utility tools"
 url="http://www.denx.de/wiki/U-Boot/WebHome"
 arch="all"
 license="GPL"
 depends=""
 makedepends="openssl-dev linux-headers sdl-dev bison flex"
-source="u-boot-${pkgver}${pkgver_suffix}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}${pkgver_suffix}"
-builddir="$srcdir/u-boot-${pkgver}${pkgver_suffix}"
+source="u-boot-${pkgver}.zip::https://codeload.github.com/u-boot/u-boot/zip/v${pkgver}"
+builddir="$srcdir/u-boot-${pkgver}"
 
 build() {
 	cd "$builddir"
@@ -32,4 +31,4 @@ package() {
 	ln -sf fw_printenv fw_setenv || return 1
 }
 
-sha512sums="76aaa7e3cf149a5cae77f662011ba73e27edfdef57170ff1aab89305ea0a2b5782c372b64725328583be9418b7babd864ba8c62dac839dc4e3c97f00c3726a14  u-boot-2018.07-rc2.zip"
+sha512sums="dd8264656819bef1b0cc9648bd34da98513433953fb14985ea70dbf8ccc827645253fc20e331a500322841526f04a2d69c2be63838e6d8ab264e709ad53f87e6  u-boot-2018.07.zip"
