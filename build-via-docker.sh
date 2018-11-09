@@ -1,4 +1,5 @@
 #!/bin/sh
+ALPINE_VERSION=${ALPINE_VERSION:-v3.8}
 DOCKER_ARCH=${DOCKER_ARCH:-armhf}
 
 # If you run:
@@ -29,5 +30,5 @@ EOF
 
 docker run -it --rm -v $(realpath ..):/media/data/fruitos \
     ${docker_squid_opts} \
-    multiarch/alpine:${DOCKER_ARCH}-edge \
+    multiarch/alpine:${DOCKER_ARCH}-${ALPINE_VERSION} \
     /bin/sh -c "cd /media/data/fruitos/apks && sh $tmpscript"
