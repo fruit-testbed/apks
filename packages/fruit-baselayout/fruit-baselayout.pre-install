@@ -2,4 +2,39 @@
 
 addgroup -S -g 42 shadow 2>/dev/null
 
+# Work around an apparent bug (?) in apk.
+#
+# Usually, we would be able to include a line such as
+#
+#	ln -s /media/data "$pkgdir"/data
+#
+# in the `package()` routine in APKBUILD. However, because the symlink
+# itself (`/data`) is in the root directory, this tickles a bug (?).
+#
+# When we build an image using docker, the root is the docker image
+# and the target root is some loopback-mounted subdirectory. APK
+# creates a temporary symlink called /.apk.SOMERANDOMSTUFF, and then
+# attempts to use renameat(2) to move it into place - which in this
+# case, is in /some/subdirectory/targetroot/data, namely across a
+# filesystem boundary. This causes renameat(2) to yield EXDEV.
+#
+# The bug doesn't seem to happen for symlinks that are not directly in
+# the target fs's root directory - for example, the symlinks in
+# APKBUILD for /etc/mtab and /var/spool/cron/crontabs seem to work
+# find. Presumably, the temporary symlinks there are e.g.
+# etc/.apk.SOMERANDOMSTUFF, which NB is a RELATIVE path and so likely
+# (?) goes in the target root to begin with, avoiding the EXDEV
+# situation.
+#
+# The best fix would be perhaps to adjust the path-building logic in
+# `format_tmpname()` in `database.c` of `apk-tools` so that symlinks
+# in the target root receive a relative pathname for renameat(2) just
+# like symlinks elsewhere in the target fs.
+#
+# For now, not wanting to patch APK, I've gone with OMITTING the
+# `install` from APKBUILD, and instead performing the symlink in this
+# pre-install script.
+#
+ln -s /media/data /data
+
 exit 0

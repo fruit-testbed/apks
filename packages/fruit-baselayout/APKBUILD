@@ -105,7 +105,12 @@ package() {
 		var/spool \
 		var/spool/cron
 
-	ln -s /media/data "$pkgdir"/data
+	# Commented out: the effect of this is achieved in
+	# `fruit-baselayout.pre-install`, because of an apparent bug
+	# in symlink-handling in APK. See the comment in
+	# `fruit-baselayout.pre-install`.
+	#
+	# ln -s /media/data "$pkgdir"/data
 	install -d -m 0555 var/empty
 	install -d -m 0700 "$pkgdir"/root
 	install -d -m 1777 "$pkgdir"/tmp "$pkgdir"/var/tmp
