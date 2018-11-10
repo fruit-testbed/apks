@@ -35,6 +35,8 @@ addgroup -S -g 42 shadow 2>/dev/null
 # `install` from APKBUILD, and instead performing the symlink in this
 # pre-install script.
 #
-ln -s /media/data /data
+# SEE ALSO ANALOGOUS CODE IN fruit-baselayout.pre-upgrade
+#
+ln -sf /media/data /data
 
 exit 0
