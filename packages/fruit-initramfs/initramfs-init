@@ -235,6 +235,8 @@ sync
 
 [ "$(grep ttyAMA0 $sysroot/etc/securetty)" = "" ] && \
 	echo "ttyAMA0" >> "$sysroot/etc/securetty"
+[ "$(grep ttyS0 $sysroot/etc/securetty)" = "" ] && \
+	echo "ttyS0" >> "$sysroot/etc/securetty"
 
 # switch root
 exec /bin/busybox switch_root $sysroot $chart_init /sbin/init $KOPT_init_args
