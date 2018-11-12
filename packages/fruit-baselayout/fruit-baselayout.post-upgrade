@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# See comment in fruit-baselayout.pre-install
+#
+ln -sf /media/data /data
+
+exit 0

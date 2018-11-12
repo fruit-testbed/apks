@@ -23,8 +23,4 @@ fi
 
 addgroup -S -g 42 shadow 2>/dev/null
 
-# See comment in fruit-baselayout.pre-install
-#
-ln -sf /media/data /data
-
 exit 0
