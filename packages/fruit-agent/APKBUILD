@@ -28,4 +28,4 @@ package() {
         make -C ${builddir} DESTDIR="$pkgdir" install
 }
 
-sha512sums="c313abc1e332e44a73bf8cdb25217799f430b6be0c7038fbda9bdd32644c9d056f14d327367d9aa2ac8a192de3ad2360d3c5d57f50524da17416eb1654b7b9e9  fruit-agent-0.2.3.zip"
+sha512sums="cf25f73b43fc7b4e86afc238f2a59789b6510238531620617c017827356ac7bdc315714c0633dd1d81e52c87b08cf59d6d6036318e2da92d42656af0a20d8a0e  fruit-agent-0.2.4.zip"
