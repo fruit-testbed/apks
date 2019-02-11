@@ -1,6 +1,6 @@
 # Maintainer: Herry <herry.herry@glasgow.ac.uk>
 pkgname=fruit-baselayout
-pkgver=0.4.9
+pkgver=0.4.10
 pkgrel=0
 pkgdesc="Fruit base dir structure and init scripts"
 url="https://fruit-testbed.org"

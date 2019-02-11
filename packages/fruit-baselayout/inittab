@@ -14,6 +14,7 @@ tty6::respawn:/sbin/getty 38400 tty6
 
 # Put a getty on the serial port
 ttyAMA0::respawn:/sbin/getty -L 115200 ttyAMA0 vt100
+ttyS0::respawn:/sbin/getty -L 115200 ttyS0 vt100
 
 # Stuff to do for the 3-finger salute
 ::ctrlaltdel:/sbin/reboot
