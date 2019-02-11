@@ -1,7 +1,7 @@
 # Maintainer: "Herry <herry.herry@glasgow.ac.uk>"
 pkgname=fruit-u-boot
 pkgver=2018.07
-pkgrel=11
+pkgrel=12
 pkgdesc="Das U-Boot"
 url="http://www.denx.de/wiki/U-Boot"
 arch="all"
