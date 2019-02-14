@@ -1,5 +1,5 @@
 pkgname=fruit-agent
-pkgver=0.2.4
+pkgver=0.2.5
 pkgrel=1
 pkgdesc="Fruit Agent"
 url="https://fruit-testbed.org"
@@ -28,4 +28,4 @@ package() {
         make -C ${builddir} DESTDIR="$pkgdir" install
 }
 
-sha512sums="cf25f73b43fc7b4e86afc238f2a59789b6510238531620617c017827356ac7bdc315714c0633dd1d81e52c87b08cf59d6d6036318e2da92d42656af0a20d8a0e  fruit-agent-0.2.4.zip"
+sha512sums="15cb7e81923e00d05adcb8f86724a3cbaf766abac7b32c4265e69aa7f2dfd5d94d9a9fc437ea6ad0041dcf7f23b0e10ffd3b53b7cb09bf989bf47eafc544f3f1  fruit-agent-0.2.5.zip"
